@@ -21,6 +21,6 @@ ln -s ~/skills/para-el-carro ~/.claude/skills/para-el-carro
 
 Los logos institucionales no se distribuyen: ver `charlas-charlie/assets/estilo/logos/LEEME.md`.
 
-`charlie-brain` funciona mejor con las [skills de Matt Pocock](https://github.com/mattpocock/skills) instaladas (`grilling`, `codebase-design`, `tdd`, `retro`, `improve-codebase-architecture`) y con `humanizer`. Su modo `retro` adapta la `retro` de Pocock; la base del `CLAUDE.md` viene de [andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills); `para-el-carro` se inspira en `wait-what` de Pocock.
+`charlie-brain` funciona mejor con las [skills de Matt Pocock](https://github.com/mattpocock/skills) instaladas (`grilling`, `codebase-design`, `tdd`, `retro`, `improve-codebase-architecture`) y con `humanizer`. Su modo `retro` adapta la `retro` de Pocock; la base del `CLAUDE.md` viene de [andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills); `para-el-carro` se inspira en `wait-what` y `teach` de Pocock y en la técnica de Feynman.
 
 Licencia MIT (cada skill lleva la suya).

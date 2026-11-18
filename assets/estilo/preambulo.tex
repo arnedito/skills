@@ -117,8 +117,10 @@
   \ifx\logo@v\logo@auto\edef\logo@v{#4}\fi
   \@for\logo@n:=\logos\do{\ifx\logo@n\@empty\else
     \@ifundefined{escalalogo@\logo@n}{\def\logo@k{1}}{\edef\logo@k{\csname escalalogo@\logo@n\endcsname}}%
+    \IfFileExists{\estilodir logos/logo-\logo@n-\logo@v.png}{%
     \logo@sep\tikz[baseline=0pt]\node[opacity=\logo@op,inner sep=0pt,anchor=south west]
-      {\includegraphics[height=\logo@k\dimexpr#1\relax]{\estilodir logos/logo-\logo@n-\logo@v.png}};%
+      {\includegraphics[height=\logo@k\dimexpr#1\relax]{\estilodir logos/logo-\logo@n-\logo@v.png}};}%
+    {\PackageWarning{charlas-charlie}{Falta el logo logos/logo-\logo@n-\logo@v.png (ver logos/LEEME.md)}}%
     \def\logo@sep{\hspace{#3}}\fi}\endgroup}
 \providecommand\autoportada{color}\providecommand\autopie{color}
 %% En la portada: grandes, abajo a la izquierda, alineados con el texto

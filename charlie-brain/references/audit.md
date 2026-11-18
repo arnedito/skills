@@ -8,6 +8,7 @@ Comprueba, y anota cada desviación:
 
 - Cada módulo del código tiene página en `docs/wiki/` y aparece en `index.md`.
 - Las páginas no contradicen el código (muestrea las de módulos con commits recientes).
+- Sin enlaces rotos entre páginas, ni páginas huérfanas fuera de `index.md`.
 - `log.md` tiene entrada para los PRs mergeados desde el último audit.
 - El `CLAUDE.md` del repo sigue corto y sin reglas que repita el global.
 - La CI corre todas las capas elegidas en `init` y ninguna está rota o desconectada.

@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: audit-stale-wiki
+context:
+  scaffold_script: place-files.sh
+expected_outcome: |
+  informe.md flags: deposition has no wiki page; transporte.md is linked but missing; log.md empty; CLAUDE.md has no-ops; CI runs no tests; plus architecture candidates, ordered by impact.

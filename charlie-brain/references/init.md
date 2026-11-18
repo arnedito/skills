@@ -31,8 +31,9 @@ En una rama `brain/init`, en este orden, un commit por bloque:
 2. `docs/wiki/index.md` y `docs/wiki/log.md` desde [`../templates/`](../templates/), con una página por módulo o concepto que la exploración haya encontrado.
 3. `docs/adr/0001-flujo-de-trabajo.md` con las decisiones de la entrevista ([`../templates/adr.md`](../templates/adr.md)).
 4. `CONTRIBUTING.md` y `.github/` desde `../templates/CONTRIBUTING.md` y `../templates/github/`, traducidos al idioma elegido para issues y PRs, adaptados y pasados por `humanizer`.
-5. CI y pre-commit según [`tests.md`](tests.md). Si ya hay tests que fallan, márcalos como fallo conocido con su issue; no los borres.
-6. Etiquetas (`area:*`, `tipo:*`) y milestones con `gh`, si está autenticado.
+5. Tests que corran de verdad: lanza el comando de tests en limpio; si falla por entorno (dependencias sin declarar, ruta del paquete, versión del intérprete), arréglalo y escribe el comando que funciona en `CONTRIBUTING.md`. Cada ecuación o fórmula ya implementada sin un test que la cite recibe ese test ahora (tests sí, código de producción no). Si ya hay tests que fallan, márcalos como fallo conocido con su issue; no los borres.
+6. CI y pre-commit según [`tests.md`](tests.md), con el mismo comando que acabas de comprobar.
+7. Etiquetas (`area:*`, `tipo:*`) y milestones con `gh`, si está autenticado.
 
 **Hecho:** la CI pasa en la rama, el PR está abierto y el usuario lo revisa. No hagas merge.
 

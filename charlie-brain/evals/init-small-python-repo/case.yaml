@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: init-small-python-repo
+context:
+  scaffold_script: place-files.sh
+expected_outcome: |
+  Interview written with numbered questions and recommendations; on a branch: short CLAUDE.md without the rules the global already has, docs/wiki/ with index, log and pages for diffusion and deposition, ADR 0001, CONTRIBUTING and .github templates, CI running pytest, sample_aerosol.csv handled.

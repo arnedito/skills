@@ -16,10 +16,11 @@ Busca patrones que se repiten, en estas categorías:
 - **Checks**: un error que un check mecánico habría pillado → hook, pre-commit o CI.
 - **Reglas**: un error de juicio repetido → regla en `CLAUDE.md` o en la plantilla de PR.
 - **Coste**: llamadas a herramientas caras que se repiten → script o comando del proyecto.
+- **Repetición**: algo que el usuario o el agente explicó dos veces → página de wiki.
 - **Información**: le faltó un dato (logs, datos de prueba, acceso) → hacerlo accesible.
 - **Fidelidad**: el código se apartó de su fuente (paper, especificación) sin anotarlo → test que cite la fuente.
 
-Un hallazgo que aparece una sola vez se anota en `log.md`, pero no genera regla.
+Un hallazgo de juicio que aparece una sola vez se anota en `log.md`, pero no genera regla. Uno mecánico (formato de commit, constante cambiada, comando equivocado) se convierte en check aunque haya salido una sola vez, si el check es barato. Al arreglar un comando o un check, ejecútalo y comprueba que funciona; un puntero a un comando roto no arregla nada.
 
 ## 3. Poda
 

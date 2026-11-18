@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: retro-repeated-friction
+context:
+  scaffold_script: place-files.sh
+expected_outcome: |
+  informe.md finds the repeated patterns (test command, radius in eq. 5, kB changed silently, commit message, duplicated CLAUDE.md) with a fix of the right kind for each (pointer, wiki page, test citing the paper, hook/check, pruning), and the repo changes are committed on a branch with a log.md entry.

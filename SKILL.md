@@ -46,11 +46,14 @@ una charla vieja al estilo nuevo salvo que te lo pidan; si te lo piden, compara 
 |---|---|
 | `\def\tema{…}` | `bloques` · `metropolis` · `clasico` · `tufte` · `oscuro` · `editorial` |
 | `\def\idioma{…}` | `english` · `spanish` |
-| `\def\logos{…}` | `harmonie,bsc` · cualquier lista de `estilo/logos/logo-<n>.png` (hay `upc`) · vacío = sin logos |
-| `\def\fondoportada{…}` | vacío · `pulmones` · `nariz` · `pulmones-original` · `malla`/`remolinos`/`espectro`/`curvas` (PDF blancos: solo portadas oscuras) · ruta a una imagen del proyecto |
+| `\def\logos{…}` | `harmonie,bsc` · también `harmonie-favicon` (solo el pulmón) y `upc` · vacío = sin logos |
+| `\def\logoportada{…}`, `\def\logopie{…}` | `auto` (color en fondo claro, blanco en oscuro) · `color` · `azul` · `negro` · `blanco` · `tenue` (auto al 45 %) |
+| `\def\tamlogos{…}` | `normal` · `pequeno` · `grande` |
+| `\def\letra{…}` | `palatino` · `charter` · `sans` · `lmodern` |
+| `\def\fondoportada{…}` | vacío · `pulmones` · `pulmones-azul`/`-rojo`/`-turquesa`/`-violeta`/`-aire` (colores fijos, fondos claros) · `nariz` · `nariz-llena` · `nariz-silueta` · `vias` · `acino` · `pulmones-original` · `malla`/`remolinos`/`espectro`/`curvas` (PDF blancos: solo portadas oscuras) · ruta a una imagen del proyecto |
 | `\def\fondoseccion{…}` | igual que `\fondoportada` |
 | `\def\progreso{…}` | `numeros` (n / N) · `barra` (barra fina en el pie) · `ambos` |
-| `\def\sangrado{…}` | `2.6cm`: cuánto se sale el fondo low-poly por la derecha |
+| `\def\sangrado{…}` | `poco` (1,2 cm) · `mucho` (2,6 cm) · `0cm` · cualquier medida |
 | `\def\nbloques{N}` | Bloques: secciones con letra y color; las posteriores (cierre, apéndice) van en neutro |
 | `\def\connotas{}` | notas del orador en pantalla aparte |
 

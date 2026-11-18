@@ -1,0 +1,52 @@
+% Charla de muestra: la usa el README (imagen de los 6 temas) y sirve de prueba rápida del estilo.
+% Compilar: ../../scripts/compilar.sh main.tex · Comparar temas: ../../scripts/comparar_temas.sh main.tex 6
+\documentclass[aspectratio=169,11pt]{beamer}
+\def\tema{clasico}
+\def\idioma{english}
+\def\nbloques{3}
+\def\fondoportada{pulmones-azul}
+\def\progreso{numeros}
+\def\estilodir{../../assets/estilo/}
+\makeatletter\def\input@path{{../../assets/estilo/}{../../assets/}}\makeatother
+\input{preambulo}
+\input{diagramas/selector.tex}
+
+\title{Turbulent pipe flow at $\mathrm{Re}_\tau = 180$}
+\subtitle{Methods, meshes and stabilisations in Alya}
+\author{Carlos Arnedo Joya}
+\institute{Barcelona Supercomputing Center}
+\date{November 2026}
+
+\begin{document}\begin{frame}[plain]\titlepage\end{frame}\end{document}
+\begin{frame}[plain]\titlepage\end{frame}
+
+\section{Methods}
+
+\begin{frame}{Three formulations reproduce the DNS on the fine mesh}
+  \begin{columns}[c]
+    \column{0.62\textwidth}
+      \figura{figs/fig-\tema.pdf}{\linewidth}{5.2cm}{Wall law and $u'_z$}
+    \column{0.34\textwidth}\small
+      \begin{itemize}\setlength\itemsep{0.9em}
+        \item Viscous sublayer: $u^+ = y^+$ up to $y^+ \approx 5$
+        \item $u'_z$ peak at $y^+ \approx 15$, as in the DNS
+        \item \caso{exp + vreman}: slightly low away from the wall
+      \end{itemize}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{A case is one choice per column}
+  \centering\selector{imp}{asgs}{din}{no}{imp asgs din}
+\end{frame}
+
+\begin{frame}{One time step: assemble, solve, update}
+  \centering\input{diagramas/flujo.tex}
+\end{frame}
+
+\begin{frame}[c]
+  \frase{The boundary layer matters more\\ than the core resolution}
+\end{frame}
+
+\section{Meshes}
+\begin{frame}{Four meshes}\noindent\figura{figs/no-existe.pdf}{\textwidth}{4cm}{A placeholder: the figure is missing}\end{frame}
+\end{document}

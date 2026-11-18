@@ -2,6 +2,15 @@
 
 Cada charla anota en `estilo/VERSION` la versión que copió.
 
+## 1.2.0 · 2026-11-18 (tras el grilling)
+
+- Logos oficiales (HARMONIE original/azul/negro/blanco, BSC azul/blanco) más `harmonie-favicon`; variantes
+  `auto|color|azul|negro|blanco|tenue` en portada y pie; tamaños `\tamlogos`.
+- `\sangrado{poco|mucho|medida}`, por defecto `poco` (1,2 cm).
+- Fondos nuevos: `pulmones-<paleta>`, `nariz-llena`, `nariz-silueta`, `vias`, `acino`.
+- Portada: reserva para los logos a su medida.
+- `\letra{palatino|charter|sans|lmodern}`. `\mensaje` empieza párrafo.
+
 ## 1.1.0 · 2026-11-17 (tras la batería de pruebas)
 
 - Bloques: separadores y viñetas de Cierre/Apéndice en neutro (`bloqueactual`); títulos de dos líneas con sangría.

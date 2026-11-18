@@ -35,10 +35,13 @@ En Bloques, `\alert` y `\frase` toman el color del bloque actual.
 
 ## Logos
 
-- `\def\logos{harmonie,bsc}` (por defecto). `upc` está disponible: `\def\logos{harmonie,bsc,upc}`.
-- Portada: 0,75 cm de alto, abajo a la izquierda. Pie: 0,35 cm, a la izquierda del número.
-- Cada tema elige la variante (`\logoportada`, `\logopie`: `color` o `blanco`). Bloques usa blanco en la
-  portada; Oscuro, blanco en ambos.
+- `\def\logos{harmonie,bsc}` (por defecto). Disponibles: `harmonie`, `harmonie-favicon` (solo el pulmón,
+  bonito en el pie), `bsc`, `upc`. Ficheros `logos/logo-<nombre>-<variante>.png` (oficiales de HARMONIE y BSC).
+- Variante por sitio: `\def\logoportada{…}` y `\def\logopie{…}` = `auto` (por defecto: lo que fija el tema,
+  color en fondo claro y blanco en oscuro), `color`, `azul` (azul BSC #1F3970), `negro`, `blanco`, `tenue` (auto al 45 %).
+- Tamaño: `\def\tamlogos{pequeno|normal|grande}` (pie 0,28/0,35/0,45 cm; portada 0,6/0,75/0,95 cm).
+- Portada: abajo a la izquierda, con hueco reservado a su medida. Pie: a la izquierda del número.
+- El tema fija qué es `auto` (`\autoportada`, `\autopie`): Bloques, blanco en la portada; Oscuro, blanco en ambos.
 - Compensación óptica por logo: `\def\escalalogo@bsc{1.3}` (dentro de `\makeatletter`). El BSC tiene
   cuatro líneas de texto y a la misma altura parece más pequeño.
 - Logo nuevo: `python scripts/preparar_logos.py logo-x.png --out estilo/logos` recorta el margen y crea
@@ -50,7 +53,10 @@ En Bloques, `\alert` y `\frase` toman el color del bloque actual.
 `\def\fondoportada{…}` (vacío por defecto) y `\def\fondoseccion{…}` (por defecto el mismo):
 
 - `pulmones`: low-poly limpio, un solo color (`motivo`), sin halos, pocas partículas. Grande, a la
-  derecha, sangrando `\sangrado` (2,6 cm) por el borde.
+  derecha, sangrando `\sangrado` por el borde (`poco` 1,2 cm por defecto, `mucho` 2,6 cm, o una medida).
+- `pulmones-azul`, `-rojo`, `-turquesa`, `-violeta`, `-aire`: paletas de color fijo (no se tiñen); solo portadas claras.
+- `nariz-llena` (huecos mallados, más densos) y `nariz-silueta` (solo contorno). `vias` (vías de
+  conducción) y `acino`, del *thesis structure*.
 - `nariz`: lo mismo con la cavidad nasal (silueta del render de *thesis structure*, con los meatos como
   huecos). Como es apaisada, va abajo a la derecha y más estrecha, lejos del título.
 - `pulmones-original`: la versión con halos y niebla (más pesada; mejor sobre fondo claro).
@@ -75,6 +81,12 @@ que se lea la forma interior (0 = solo contorno). Copia `<nombre>.tex` a `estilo
 
 `\def\progreso{numeros}` (n / N), `barra` (línea fina a todo el ancho al pie, en `\colorprogreso`: el
 acento; en Bloques, el color del bloque) o `ambos`. En Bloques además está la tira de bloques arriba.
+
+## Letra
+
+`\def\letra{palatino}` por defecto (mathpazo, igual que las figuras). Alternativas: `charter` (texto Charter,
+fórmulas Computer Modern), `sans` (Helvetica, salas grandes), `lmodern`. Libertinus o Source Sans necesitan
+`texlive-fonts-extra`. Si cambias la letra, cambia también `text.latex.preamble` en `charla.mplstyle`.
 
 ## Idioma
 

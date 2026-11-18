@@ -2,22 +2,30 @@
 %% Antes de \input{preambulo}, opcionalmente (los valores por defecto van primero):
 %%   \def\tema{bloques}        bloques | metropolis | clasico | tufte | oscuro | editorial
 %%   \def\idioma{english}      english | spanish (babel)
-%%   \def\logos{harmonie,bsc}  lista de estilo/logos/logo-<n>.png (también upc); \def\logos{} los quita
+%%   \def\logos{harmonie,bsc}  lista de logos: harmonie, harmonie-favicon, bsc, upc; \def\logos{} los quita
+%%   \def\logoportada{auto}    auto (color en fondo claro, blanco en oscuro) | color | azul | negro | blanco | tenue
+%%   \def\logopie{auto}        igual, para el pie de las slides de contenido
+%%   \def\tamlogos{normal}     pequeno | normal | grande
+%%   \def\letra{palatino}      palatino | charter | sans (Helvetica) | lmodern
 %%   \def\fondoportada{}       vacío (sin fondo) | pulmones | nariz | pulmones-original | malla | remolinos |
 %%                             espectro | curvas | ruta a una imagen propia (p. ej. figs/fondo.png)
 %%   \def\fondoseccion{...}    fondo de los separadores (por defecto, el mismo que la portada)
 %%   \def\progreso{numeros}    numeros (n / N) | barra (barra fina en el pie) | ambos
-%%   \def\sangrado{2.6cm}      cuánto se sale por la derecha el fondo low-poly (0cm: entero)
+%%   \def\sangrado{poco}       poco (1,2 cm) | mucho (2,6 cm) | 0cm (entero) | cualquier medida
 %%   \def\connotas{}           notas del orador en pantalla aparte (apagado por defecto)
 %% Desde latexmk:  latexmk -pdf -usepretex='\def\tema{oscuro}' -jobname=charla-oscuro main.tex
-\def\estiloversion{1.1.0}
+\def\estiloversion{1.2.0}
 \providecommand\tema{bloques}
 \providecommand\idioma{english}
 \providecommand\logos{harmonie,bsc}
 \providecommand\fondoportada{}
 \providecommand\fondoseccion{\fondoportada}
 \providecommand\progreso{numeros}
-\providecommand\sangrado{2.6cm}          % cuánto se sale el fondo low-poly por la derecha (0cm = nada)
+\providecommand\sangrado{poco}
+\providecommand\logoportada{auto}
+\providecommand\logopie{auto}
+\providecommand\tamlogos{normal}
+\providecommand\letra{palatino}
 \providecommand\estilodir{estilo/}        % ruta a esta carpeta desde la charla
 
 \usepackage[T1]{fontenc}
@@ -25,9 +33,17 @@
 \usepackage{babel}
 \babelprovide[import,main]{\idioma}
 \usepackage{amsmath,amssymb}
-\usepackage[sc]{mathpazo}              % Palatino en texto y fórmulas (igual que las figuras)
-\renewcommand\sfdefault{ppl}           % lo que pida \sffamily también sale en Palatino
-\usefonttheme{serif}
+\makeatletter
+\def\letra@a{palatino}\def\letra@b{charter}\def\letra@c{sans}\def\letra@d{lmodern}
+\ifx\letra\letra@b \usepackage{charter}\fi  % Charter en el texto; fórmulas en Computer Modern
+\ifx\letra\letra@b\else\ifx\letra\letra@c\else\ifx\letra\letra@d\else
+  \usepackage[sc]{mathpazo}              % Palatino en texto y fórmulas (igual que las figuras)
+  \renewcommand\sfdefault{ppl}\fi\fi\fi  % lo que pida \sffamily también sale en Palatino
+\ifx\letra\letra@c \usepackage[scaled=0.92]{helvet}\renewcommand\familydefault{\sfdefault}\fi
+\ifx\letra\letra@d \usepackage{lmodern}\fi
+
+\ifx\letra\letra@c\else\usefonttheme{serif}\fi
+\makeatother
 \usefonttheme{professionalfonts}
 \usepackage{microtype}
 \usepackage{booktabs,multirow,array}
@@ -47,16 +63,18 @@
 %%   - motivos/motivo-<nombre>.pdf: en la esquina inferior derecha;
 %%   - cualquier otra ruta que exista: la imagen, abajo a la derecha.
 \newsavebox\fondo@tmp
-\newcommand\fondo[2][0.9]{\ifdefined\sinfondo\else\edef\fondo@n{#2}\ifx\fondo@n\@empty\else
+\def\sangrado@poco{1.2cm}\def\sangrado@mucho{2.6cm}
+\newcommand\fondo[2][0.9]{\ifdefined\sinfondo\else
+  \@ifundefined{sangrado@\sangrado}{\edef\sangrado@d{\sangrado}}{\edef\sangrado@d{\csname sangrado@\sangrado\endcsname}}\edef\fondo@n{#2}\ifx\fondo@n\@empty\else
   \IfFileExists{\estilodir\fondo@n.tex}{%
     \@ifundefined{fondo@box@\fondo@n}{%
       \expandafter\newsavebox\csname fondo@box@\fondo@n\endcsname
       \global\expandafter\sbox\csname fondo@box@\fondo@n\endcsname{\input{\estilodir\fondo@n.tex}}}{}%
     \sbox\fondo@tmp{\resizebox{!}{#1\paperheight}{\expandafter\usebox\csname fondo@box@\fondo@n\endcsname}}%
-    \def\fondo@ancla{anchor=east,inner sep=0pt] at ([xshift=\sangrado,yshift=-0.3cm]current page.east}%
+    \def\fondo@ancla{anchor=east,inner sep=0pt] at ([xshift=\sangrado@d,yshift=-0.3cm]current page.east}%
     \ifdim\wd\fondo@tmp>0.62\paperwidth % apaisado (nariz): más estrecho y abajo, lejos del título
       \sbox\fondo@tmp{\resizebox{0.56\paperwidth}{!}{\expandafter\usebox\csname fondo@box@\fondo@n\endcsname}}%
-      \def\fondo@ancla{anchor=south east,inner sep=0pt] at ([xshift=\sangrado,yshift=0.2cm]current page.south east}\fi}{%
+      \def\fondo@ancla{anchor=south east,inner sep=0pt] at ([xshift=\sangrado@d,yshift=0.2cm]current page.south east}\fi}{%
   \IfFileExists{\estilodir motivos/motivo-\fondo@n.pdf}{%
     \sbox\fondo@tmp{\includegraphics[height=0.8\paperheight,width=0.4\paperwidth,keepaspectratio]%
       {\estilodir motivos/motivo-\fondo@n.pdf}}%
@@ -85,33 +103,38 @@
   \end{tikzpicture}\fi\fi}
 
 %% ---- Logos ----------------------------------------------------------------
-%% \filalogos{alto}{variante}{separación}: los logos de \logos en fila. Variante: color | blanco.
-%% Cada tema fija \logoportada y \logopie (blanco sobre fondo oscuro).
-\providecommand\logoportada{color}
-\providecommand\logopie{color}
-\def\logo@blanco{blanco}
-% compensación óptica: el BSC tiene cuatro líneas de texto y a igual altura parece más pequeño
-\def\escalalogo@bsc{1.3}\def\escalalogo@upc{1.15}
-\newcommand\filalogos[3]{\begingroup\def\logo@sep{}\edef\logo@v{#2}%
-  \ifx\logo@v\logo@blanco\def\logo@suf{-blanco}\else\def\logo@suf{}\fi
+%% Ficheros: estilo/logos/logo-<nombre>-<variante>.png (variantes color, azul, negro, blanco).
+%% \filalogos{alto}{variante}{separación}{auto}: los logos de \logos en fila. 'auto' toma la variante que
+%% fija el tema (\autoportada, \autopie: color en fondo claro, blanco en oscuro); 'tenue' = auto al 45 %.
+\def\logo@auto{auto}\def\logo@tenue{tenue}
+% compensación óptica: el BSC tiene cuatro líneas y el favicon es casi cuadrado
+\def\escalalogo@bsc{1.3}\def\escalalogo@upc{1.15}\@namedef{escalalogo@harmonie-favicon}{1.4}
+\def\tamlogos@pequeno{{0.28cm}{0.6cm}}\def\tamlogos@normal{{0.35cm}{0.75cm}}\def\tamlogos@grande{{0.45cm}{0.95cm}}
+\def\tam@pie{\expandafter\expandafter\expandafter\@firstoftwo\csname tamlogos@\tamlogos\endcsname}
+\def\tam@portada{\expandafter\expandafter\expandafter\@secondoftwo\csname tamlogos@\tamlogos\endcsname}
+\newcommand\filalogos[4]{\begingroup\def\logo@sep{}\edef\logo@v{#2}\def\logo@op{1}%
+  \ifx\logo@v\logo@tenue\edef\logo@v{#4}\def\logo@op{0.45}\fi
+  \ifx\logo@v\logo@auto\edef\logo@v{#4}\fi
   \@for\logo@n:=\logos\do{\ifx\logo@n\@empty\else
     \@ifundefined{escalalogo@\logo@n}{\def\logo@k{1}}{\edef\logo@k{\csname escalalogo@\logo@n\endcsname}}%
-    \logo@sep\includegraphics[height=\logo@k\dimexpr#1\relax]{\estilodir logos/logo-\logo@n\logo@suf.png}%
+    \logo@sep\tikz[baseline=0pt]\node[opacity=\logo@op,inner sep=0pt,anchor=south west]
+      {\includegraphics[height=\logo@k\dimexpr#1\relax]{\estilodir logos/logo-\logo@n-\logo@v.png}};%
     \def\logo@sep{\hspace{#3}}\fi}\endgroup}
+\providecommand\autoportada{color}\providecommand\autopie{color}
 %% En la portada: grandes, abajo a la izquierda, alineados con el texto
 \newcommand\logosportada{\ifx\logos\@empty\else
   \begin{tikzpicture}[remember picture,overlay]
-    \node[anchor=south west,inner sep=0pt] at ([xshift=\margenizq,yshift=0.65cm]current page.south west)
-      {\filalogos{0.75cm}{\logoportada}{0.7cm}};
+    \node[anchor=south west,inner sep=0pt] at ([xshift=\margenizq,yshift=0.6cm]current page.south west)
+      {\filalogos{\tam@portada}{\logoportada}{0.7cm}{\autoportada}};
   \end{tikzpicture}\fi}
-%% Hueco al pie de la portada para que el texto no pise los logos
-\newcommand\reservalogos{\ifx\logos\@empty\else\vspace*{1.7cm}\fi}
+%% Al pie de la portada: hueco a la medida de los logos (el bloque de título queda centrado en lo que sobra)
+\newcommand\reservalogos{\ifx\logos\@empty\else\vspace*{\dimexpr1.3\dimexpr\tam@portada\relax+0.4cm\relax}\fi}
 %% En el pie de las slides de contenido: pequeños. No van en separadores ni en slides-frase.
 \newif\ifsinlogos
 \BeforeBeginEnvironment{frame}{\global\sinlogosfalse}
 \newcommand\ocultarlogos{\global\sinlogostrue}
 \newcommand\logospie{\ifsinlogos\else\ifx\logos\@empty\else
-  \raisebox{-0.1cm}{\filalogos{0.35cm}{\logopie}{0.3cm}}\hspace{0.45cm}\fi\fi}
+  \raisebox{-0.1cm}{\filalogos{\tam@pie}{\logopie}{0.3cm}{\autopie}}\hspace{0.45cm}\fi\fi}
 
 %% ---- Progreso -------------------------------------------------------------
 %% \barraprogreso: línea fina a todo el ancho, llena hasta n/N, en \colorprogreso (lo puede fijar el tema)

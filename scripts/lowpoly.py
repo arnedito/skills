@@ -59,8 +59,8 @@ def remuestrear(c, h, rng, ruido=0.25):
 class Pieza:
     """Una silueta cerrada (con huecos opcionales): test dentro/fuera y distancia al borde más cercano."""
 
-    def __init__(self, curva, huecos=()):
-        self.curva, self.huecos = curva, list(huecos)
+    def __init__(self, curva, huecos=(), vaciar=True):
+        self.curva, self.huecos, self.vaciar = curva, list(huecos), vaciar
         self.path = MPath(curva)
         self.paths_h = [MPath(h) for h in self.huecos]
         self.arbol = cKDTree(np.vstack([remuestrear(c, 0.15, None) for c in [curva] + self.huecos]))
@@ -68,7 +68,7 @@ class Pieza:
     def dentro(self, p):
         p = np.atleast_2d(p)
         ok = self.path.contains_points(p)
-        for h in self.paths_h:
+        for h in self.paths_h if self.vaciar else []:
             ok &= ~h.contains_points(p)
         return ok
 
@@ -165,7 +165,7 @@ def escena(piezas_mallas, rng, n_flot=8, n_tri_flot=3, n_llegando=4):
 
     quitados = set()
     if n_llegando:                     # huecos en la esquina superior derecha de la pieza mayor
-        grandes = [i for i in range(len(piezas_mallas)) if len(piezas_mallas[i][2]) > 60]
+        grandes = [i for i in range(len(piezas_mallas)) if len(piezas_mallas[i][2]) > 60] or list(range(len(piezas_mallas)))
         k = max(grandes, key=lambda i: (piezas_mallas[i][0].curva @ [1, 0.6]).max())
         pieza, pts, tri, _ = piezas_mallas[k]
         cen = pts[tri].mean(axis=1)
@@ -302,6 +302,8 @@ if __name__ == "__main__":
     ap.add_argument("--imagen", help="render con fondo blanco; sin esto: pulmones")
     ap.add_argument("--ancho", type=float, default=150, help="ancho de la silueta en mm")
     ap.add_argument("--huecos", type=float, default=14, help="percentil de sombra que se vacía (0 = ninguno)")
+    ap.add_argument("--llenar", action="store_true",
+                    help="no vaciar los huecos: se mallan, más densos junto a su contorno")
     ap.add_argument("--seed", type=int, default=7)
     ap.add_argument("--hborde", type=float, default=3.0)
     ap.add_argument("--hcentro", type=float, default=17.0)
@@ -313,7 +315,7 @@ if __name__ == "__main__":
     if a.imagen:
         curvas = [suavizar(remuestrear(c, 2.0, None), n=max(60, int(perimetro(c) / 0.5)))
                   for c in silueta_imagen(a.imagen, a.ancho, a.huecos)]
-        p = Pieza(curvas[0], curvas[1:])
+        p = Pieza(curvas[0], curvas[1:], vaciar=not a.llenar)
         mallas = [(p, *mallar(p, a.hborde, a.hcentro, rng), 5.0)]
         fuente = f"{a.nombre} --imagen {Path(a.imagen).name}"
     else:

@@ -56,11 +56,14 @@ En `main.tex`, antes de `\input{preambulo}`:
 |---|---|
 | `\def\tema{…}` | `bloques` · `metropolis` · `clasico` · `tufte` · `oscuro` · `editorial` |
 | `\def\idioma{…}` | `english` · `spanish` |
-| `\def\logos{…}` | `harmonie,bsc` · cualquier lista de `estilo/logos/logo-<n>.png` (`upc` incluido) · vacío |
-| `\def\fondoportada{…}` | vacío · `pulmones` · `nariz` · `pulmones-original` · `malla` · `remolinos` · una imagen propia |
+| `\def\logos{…}` | `harmonie,bsc` · `harmonie-favicon` · `upc` · vacío |
+| `\def\logoportada{…}` / `\def\logopie{…}` | `auto` · `color` · `azul` · `negro` · `blanco` · `tenue` |
+| `\def\tamlogos{…}` | `normal` · `pequeno` · `grande` |
+| `\def\letra{…}` | `palatino` · `charter` · `sans` · `lmodern` |
+| `\def\fondoportada{…}` | vacío · `pulmones` · `pulmones-azul`/`-rojo`/`-turquesa`/`-violeta`/`-aire` (colores fijos, fondos claros) · `nariz` · `nariz-llena` · `nariz-silueta` · `vias` · `acino` · `pulmones-original` · `malla` · `remolinos` · una imagen propia |
 | `\def\fondoseccion{…}` | fondo de los separadores (por defecto, el de la portada) |
 | `\def\progreso{…}` | `numeros` · `barra` · `ambos` |
-| `\def\sangrado{…}` | `2.6cm`: cuánto se sale el fondo por la derecha |
+| `\def\sangrado{…}` | `poco` · `mucho` · cualquier medida |
 | `\def\nbloques{N}` | (Bloques) nº de secciones con letra y color |
 | `\def\connotas{}` | notas del orador en una segunda pantalla |
 

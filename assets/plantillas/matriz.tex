@@ -1,0 +1,20 @@
+%% PATRÓN · Matriz por bloques: rectángulos rellenos a escala (el tamaño cuenta algo), vector y
+%% resultado, y una flecha con la operación. Original: charla01/ap/bloques.tex.
+\begin{tikzpicture}[x=0.42cm,y=0.42cm]
+  \fill[serieA!35!fondo] (0,1) rectangle (4,5); \node[font=\small] at (2,3) {$A_{uu}$};
+  \fill[tinta!12!fondo] (4,1) rectangle (5,5); \node[font=\scriptsize,rotate=90] at (4.5,3) {$A_{up}$};
+  \fill[tinta!12!fondo] (0,0) rectangle (4,1); \node[font=\scriptsize] at (2,0.5) {$A_{pu}$};
+  \fill[serieC!40!fondo] (4,0) rectangle (5,1); \node[font=\tiny] at (4.5,0.5) {$A_{pp}$};
+  \draw[tinta,line width=0.5pt] (0,0) rectangle (5,5) (4,0) -- (4,5) (0,1) -- (5,1);
+  \fill[serieA!35!fondo] (5.6,1) rectangle (6.3,5); \fill[serieC!40!fondo] (5.6,0) rectangle (6.3,1);
+  \draw[tinta,line width=0.5pt] (5.6,0) rectangle (6.3,5) (5.6,1) -- (6.3,1);
+  \node[font=\scriptsize] at (5.95,3) {$\boldsymbol u$}; \node[font=\tiny] at (5.95,0.5) {$p$};
+  \node at (7.0,2.5) {$=$};
+  \fill[serieA!35!fondo] (7.7,1) rectangle (8.4,5); \fill[serieC!40!fondo] (7.7,0) rectangle (8.4,1);
+  \draw[tinta,line width=0.5pt] (7.7,0) rectangle (8.4,5) (7.7,1) -- (8.4,1);
+  \node[font=\scriptsize] at (8.05,3) {$\boldsymbol b_u$}; \node[font=\tiny] at (8.05,0.5) {$b_p$};
+  \draw[-{Stealth[length=6pt]},tinta,line width=1pt] (9.2,2.5) -- node[above,font=\scriptsize]{eliminar $\boldsymbol u$} (12.4,2.5);
+  \fill[serieC!40!fondo] (13,2) rectangle (14,3); \draw[tinta,line width=0.5pt] (13,2) rectangle (14,3);
+  \node[font=\small] at (13.5,2.5) {$S$}; \node[font=\small,anchor=west] at (14.1,2.5) {$p = b_s$};
+  \node[font=\scriptsize,text=tenue,align=center] at (13.9,1.0) {mucho más pequeño,\\ solo presión};
+\end{tikzpicture}

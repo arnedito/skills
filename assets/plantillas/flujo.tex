@@ -1,0 +1,24 @@
+%% PATRÓN · Flujo con cajas y bucle (un paso de un algoritmo, una iteración). Estilo por defecto:
+%% cajas neutras con borde negro (tinta), UN foco en acento (el paso que importa), el grupo con tono sin
+%% borde, flechas ortogonales redondeadas y la condición del bucle sobre el trazo con fondo.
+%% Color por familia solo si significa algo: caja=serieA!12!fondo en vez de fondo.
+%% Estilos con #1: este fichero va con \input, nunca pegado dentro de un frame.
+\begin{tikzpicture}[
+    caja/.style={fill=fondo,draw=tinta,line width=0.6pt,rounded corners=2.5pt,align=left,inner sep=6pt,
+      font=\scriptsize,text width=2.6cm,minimum height=2.2cm},
+    foco/.style={caja,fill=acento!10!fondo,draw=acento,line width=0.9pt},
+    flecha/.style={-{Stealth[length=5pt]},tinta,line width=0.8pt,rounded corners=4pt},
+    rotulo/.style={font=\scriptsize,fill=fondo,inner sep=1pt}]
+  \def\dx{3.4}
+  \node[caja] (a) at (0,0) {\textbf{1 · Ensamblar}\\[2pt] matriz y residuo\\[2pt] {\color{tenue}cada iteración}};
+  \node[foco] (b) at (\dx,0) {\textbf{2 · Resolver}\\[2pt] $A\,\boldsymbol x = \boldsymbol b$\\[2pt] {\color{tenue}GMRES + precond.}};
+  \node[caja] (c) at (2*\dx,0) {\textbf{3 · Actualizar}\\[2pt] $\boldsymbol x^{k+1} = \boldsymbol x^k + \delta\boldsymbol x$};
+  \draw[flecha] (a) -- (b); \draw[flecha] (b) -- (c);
+  \begin{scope}[on background layer]
+    \node[fill=tinta!5!fondo,rounded corners=4pt,inner xsep=10pt,inner ysep=12pt,fit=(a)(b)(c)] (it) {};
+  \end{scope}
+  \node[anchor=north west,font=\scriptsize,text=tenue,inner sep=4pt] at (it.north west) {iteración no lineal};
+  \draw[flecha] (c.south) -- ++(0,-0.75) -| node[rotulo,pos=0.25]{¿residuo $> 10^{-3}$?} (a.south);
+  \draw[flecha] ($(it.west)+(-0.7,0)$) node[left,font=\small]{$n$} -- (it.west);
+  \draw[flecha] (it.east) -- ++(0.6,0) node[right,font=\small]{$n{+}1$};
+\end{tikzpicture}

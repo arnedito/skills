@@ -1,0 +1,39 @@
+%% PATRÓN · Esquema físico (geometría con cotas): trazos en tinta, cotas en tenue con flechas finas a los dos
+%% lados y la etiqueta en fondo, ejes pequeños en una esquina, UN foco en acento (la fuerza, la condición).
+%% Sin cajas de flujo. Original: prueba esquema-pipe de tikz-charlie.
+%% Esquema físico: tubo periódico (corte longitudinal), perfil turbulento, R, L = 15R, f_z. A escala: R = 0.8 cm.
+\begin{tikzpicture}[line join=round,
+    flecha/.style={-{Stealth[length=5pt]},tinta,line width=0.8pt},
+    cota/.style={{Stealth[length=4pt]}-{Stealth[length=4pt]},tenue,line width=0.5pt},
+    rotulo/.style={font=\scriptsize,fill=fondo,inner sep=1pt}]
+  \def\R{0.8}\def\L{12}\def\xp{3.0}\def\U{1.5}
+  % fluido (tono) y paredes
+  \fill[tinta!5!fondo] (0,-\R) rectangle (\L,\R);
+  \draw[tinta,line width=1pt] (0,\R) -- (\L,\R) (0,-\R) -- (\L,-\R);
+  % caras periódicas
+  \draw[tenue,dashed,line width=0.6pt] (0,-\R) -- (0,\R) (\L,-\R) -- (\L,\R);
+  \draw[tenue,line width=0.5pt,-{Stealth[length=4pt]},rounded corners=4pt]
+    (\L,\R+0.25) -- (\L,\R+0.55) -- (0,\R+0.55) -- (0,\R+0.25);
+  \node[rotulo,text=tenue] at (\L/2,\R+0.55) {periódico};
+  % eje
+  \draw[tenue,dash dot,line width=0.4pt] (-0.3,0) -- (\L+0.3,0);
+  % perfil turbulento u(r) ~ (1-|r|/R)^{1/7}
+  \draw[tinta!50!fondo,line width=0.5pt] (\xp,-\R) -- (\xp,\R);
+  \foreach \y in {-0.65,-0.4,-0.15,0.15,0.4,0.65}
+    \draw[tinta!70!fondo,line width=0.6pt,-{Stealth[length=3pt]}] (\xp,\y*\R/0.8) -- ++({\U*(1-abs(\y)/0.8)^(1/7)},0);
+  \draw[tinta,line width=1pt] (\xp,-\R) -- ({\xp+\U*(0.001)^(1/7)},-0.999*\R);
+  \draw[tinta,line width=1pt,domain=-0.999:0.999,samples=80,smooth]
+    plot ({\xp+\U*(1-abs(\x))^(1/7)},{\x*\R}) -- (\xp,\R);
+  \node[font=\scriptsize,text=tinta,right] at (\xp+\U+0.05,0.35) {$\langle u_z\rangle(r)$};
+  % radio
+  \draw[cota] (7.6,0) -- (7.6,\R) node[midway,right,font=\scriptsize,text=tinta] {$R$};
+  % longitud
+  \draw[cota] (0,-\R-0.4) -- (\L,-\R-0.4);
+  \node[rotulo] at (\L/2,-\R-0.4) {$L = 15R$};
+  % fuerza: el foco
+  \draw[acento,line width=1.4pt,-{Stealth[length=7pt]}] (9.2,0) -- (11.2,0);
+  \node[font=\footnotesize,text=acento,above] at (10.2,0.05) {$\boldsymbol f_z$};
+  % ejes
+  \draw[flecha,line width=0.6pt] (-0.9,-\R) -- ++(0.6,0) node[right,font=\scriptsize] {$z$};
+  \draw[flecha,line width=0.6pt] (-0.9,-\R) -- ++(0,0.6) node[above,font=\scriptsize] {$r$};
+\end{tikzpicture}

@@ -1,0 +1,17 @@
+%% Tokens de color con valores fijos, para usar las plantillas FUERA de Beamer (papers, tesis, standalone).
+%% \input{colores-fijos} en el preámbulo (con \usepackage{tikz} y las librerías de abajo). Mismos nombres
+%% que los temas de charlas-charlie: las plantillas funcionan sin cambios. Valores del tema Bloques, sobre blanco.
+\usetikzlibrary{positioning,arrows.meta,calc,fit,backgrounds,matrix,patterns,decorations.pathreplacing}
+\definecolor{fondo}{HTML}{FFFFFF}
+\definecolor{tinta}{HTML}{1B1B2F}
+\definecolor{tenue}{HTML}{8C8C99}
+\definecolor{regla}{HTML}{E3E3E8}
+\definecolor{acento}{HTML}{E4572E}
+\definecolor{serieA}{HTML}{2E5EAA}
+\definecolor{serieB}{HTML}{E4572E}
+\definecolor{serieC}{HTML}{0F8B8D}
+\definecolor{serieD}{HTML}{D98E04}
+\colorlet{textochip}{white}
+\providecommand\caso[1]{{\mdseries\scshape\lowercase{#1}}}
+\providecommand\figura[5][]{\IfFileExists{#2}{\includegraphics[width=#3,height=#4,keepaspectratio,#1]{#2}}%
+  {\fbox{\parbox[c][#4][c]{#3}{\centering\scriptsize #5}}}}

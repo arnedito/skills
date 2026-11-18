@@ -1,0 +1,17 @@
+%% Subescala cuasiestática (salta) frente a dinámica (relaja con tiempo τ1). Esquemático.
+\begin{tikzpicture}[x=1.0cm,y=1.3cm]
+  \draw[tenue,-{Stealth[length=4pt]}] (0,0) -- (6.2,0) node[right,font=\scriptsize]{$t$};
+  \draw[tenue,-{Stealth[length=4pt]}] (0,0) -- (0,1.45) node[above,font=\scriptsize]{$\tilde u$};
+  \foreach \x in {0,2,4} \draw[tenue!60] (\x,0) -- (\x,-0.05);
+  \node[font=\tiny,text=tenue,below] at (1,0) {paso $n$}; \node[font=\tiny,text=tenue,below] at (3,0) {$n{+}1$};
+  \node[font=\tiny,text=tenue,below] at (5,0) {$n{+}2$};
+  % objetivo tau1 P(R): escalones
+  \draw[ingSub,line width=1.1pt] (0,0.4) -- (2,0.4) -- (2,1.15) -- (4,1.15) -- (4,0.7) -- (6,0.7);
+  % dinámica: relaja hacia el objetivo
+  \draw[ingTau,line width=1.1pt,domain=0:2,samples=30] plot (\x,{0.4});
+  \draw[ingTau,line width=1.1pt,domain=0:2,samples=40] plot ({2+\x},{1.15-0.75*exp(-1.6*\x)});
+  \draw[ingTau,line width=1.1pt,domain=0:2,samples=40] plot ({4+\x},{0.7+(1.15-0.75*exp(-3.2)-0.7)*exp(-1.6*\x)});
+  \node[font=\scriptsize,text=ingSub!85!black,anchor=west] at (0.1,1.33) {cuasiestática: $\tilde u = \tau_1\mathcal P(\mathcal R)$, salta};
+  \node[font=\scriptsize,text=ingTau,anchor=west] at (2.35,0.55) {dinámica: relaja};
+  \draw[{Stealth[length=3pt]}-{Stealth[length=3pt]},tenue] (2,0.25) -- (2.62,0.25) node[midway,below,font=\tiny]{$\sim\tau_1$};
+\end{tikzpicture}

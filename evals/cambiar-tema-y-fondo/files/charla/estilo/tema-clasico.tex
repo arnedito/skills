@@ -1,0 +1,44 @@
+%% Tema 2 · Clásico serif (Palatino, azul marino, sin barras)
+\usetheme{default}
+\definecolor{fondo}{HTML}{FFFFFF}
+\definecolor{tinta}{HTML}{1E1E24}
+\definecolor{tenue}{HTML}{8A8A90}
+\definecolor{regla}{HTML}{CFCFD4}
+\definecolor{acento}{HTML}{8C2F39}
+\definecolor{serieA}{HTML}{1B2A49}
+\definecolor{serieB}{HTML}{B08D57}
+\definecolor{serieC}{HTML}{6B8CAE}
+\definecolor{serieD}{HTML}{8C2F39}
+\definecolor{motivo}{HTML}{1B2A49}
+\newlength\margenizq \setlength\margenizq{1.0cm}
+\newlength\margender \setlength\margender{1.0cm}
+\newlength\pieabajo  \setlength\pieabajo{3mm}
+\setbeamersize{text margin left=\margenizq,text margin right=\margender}
+\setbeamercolor{normal text}{fg=tinta,bg=fondo}
+\setbeamercolor{structure}{fg=serieA}
+\setbeamercolor{frametitle}{fg=serieA}
+\setbeamercolor{title}{fg=serieA}
+\setbeamercolor{alerted text}{fg=acento}
+\setbeamercolor{footline}{fg=tenue}
+\setbeamerfont{frametitle}{size=\Large}
+\setbeamerfont{title}{size=\LARGE}
+\setbeamerfont{footline}{size=\scriptsize,shape=\scshape}
+\setbeamerfont{block title}{shape=\scshape}
+\setbeamertemplate{frametitle}{%
+  \vspace*{0.55cm}\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par
+  \ifx\insertframesubtitle\empty\else{\normalsize\mdseries\upshape\color{tenue}\insertframesubtitle\par}\fi\vspace*{-0.1cm}{\color{regla}\rule{\textwidth}{0.4pt}}\vspace*{0.1cm}}
+\setbeamertemplate{itemize item}{\color{serieA}\raisebox{0.25ex}{\rule{0.42ex}{0.42ex}}}
+\setbeamertemplate{itemize subitem}{\color{tenue}\textendash}
+\setbeamertemplate{title page}{%
+  \fondo{\fondoportada}\logosportada\vfill
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}\vspace{0.35cm}
+  {\itshape\large\insertsubtitle\par}\vspace{0.5cm}
+  {\color{regla}\rule{4cm}{0.4pt}\par}\vspace{0.5cm}
+  {\scshape\insertauthor\par}\vspace{0.1cm}
+  {\small\color{tenue}\insertinstitute\par\insertdate\par}\vfill}
+\setbeamertemplate{section page}{%
+  \fondo[0.75]{\fondoseccion}
+  {\scshape\color{tenue}\partname\ \Roman{section}\par}\vspace{0.3cm}
+  {\usebeamerfont{title}\color{serieA}\insertsectionhead\par}}
+\input{tema-comun-footline.tex}
+\AtBeginSection{\begin{frame}[plain,c]\usebeamertemplate{section page}\end{frame}}

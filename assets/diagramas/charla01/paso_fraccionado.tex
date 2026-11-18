@@ -1,0 +1,10 @@
+%% Paso fraccionado en tres pasos (apéndice).
+\begin{tikzpicture}[
+    caja/.style={fill=#1!12,draw=tinta,line width=0.6pt,rounded corners=3pt,text width=2.25cm,minimum height=1.8cm,
+      align=left,inner sep=5pt,font=\scriptsize},
+    flecha/.style={-{Stealth[length=5pt]},tinta,line width=0.8pt}]
+  \node[caja=ingLes] (a) at (0,0) {\textbf{1 · Predictor}\\ avanza $\boldsymbol u$ sin imponer $\nabla\!\cdot\boldsymbol u = 0$\\ {\color{tenue}$\boldsymbol U^*$}};
+  \node[caja=ingTau,right=0.35cm of a] (b) {\textbf{2 · Poisson}\\ busca la presión que arregla la divergencia\\ {\color{tenue}$\Phi$}};
+  \node[caja=ingLes,right=0.35cm of b] (c) {\textbf{3 · Corrección}\\ resta $\nabla\Phi$\\ {\color{tenue}$\boldsymbol U = \boldsymbol U^* - \delta t\,\nabla\Phi$}};
+  \draw[flecha] (a) -- (b); \draw[flecha] (b) -- (c);
+\end{tikzpicture}

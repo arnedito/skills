@@ -1,0 +1,19 @@
+%% PATRÓN · Pipeline: una cadena de etapas iguales y, debajo, lo que sale de una de ellas.
+%% Todas las cajas del mismo tamaño (anchor=north + \dx fijo): la regularidad es lo que se lee como
+%% cadena. Color por familia de etapa; la novedad, en otro color. Original: charla01/aire.tex.
+\begin{tikzpicture}[
+    caja/.style={fill=#1!12!fondo,draw=tinta,line width=0.6pt,rounded corners=3pt,
+      text width=2.72cm,minimum height=1.7cm,align=left,inner sep=5pt,font=\footnotesize,anchor=north},
+    flecha/.style={-{Stealth[length=6pt]},tinta,line width=0.9pt}]
+  \def\dx{3.56}
+  \node[caja=serieA] (a) at (0,0)      {\textbf{Simulación}\\ campos y promedios en $t$};
+  \node[caja=serieA] (b) at (\dx,0)    {\textbf{Conversión}\\ formato de lectura};
+  \node[caja=serieC] (c) at (2*\dx,0)  {\textbf{Postproceso}\\ promedios en las direcciones homogéneas};
+  \node[caja=serieC] (d) at (3*\dx,0)  {\textbf{Comparación}\\ frente a la referencia\\ {\color{tenue}error L2}};
+  \draw[flecha] (a.east) -- (b.west); \draw[flecha] (b.east) -- (c.west); \draw[flecha] (c.east) -- (d.west);
+  \node[anchor=south west,font=\scriptsize,text=tenue,inner sep=0pt] at (-1.56,-2.27) {Lo que sale del \textbf{postproceso}};
+  \node[caja=serieC] at (0,-2.4)      {\textbf{Perfiles}\\ medias y fluctuaciones};
+  \node[caja=serieC] at (\dx,-2.4)    {\textbf{Pared}\\ esfuerzo y velocidad de fricción};
+  \node[caja=serieC] at (2*\dx,-2.4)  {\textbf{Sondas}\\ series $\to$ espectros};
+  \node[caja=serieD] at (3*\dx,-2.4)  {\textbf{Nuevo}\\ iteraciones y coste};
+\end{tikzpicture}

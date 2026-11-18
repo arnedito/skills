@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: charla-ingles-clasico
+expected_outcome: |
+  Carpeta de charla con main.tex en tema clasico e idioma english, figura matplotlib en figs/ con el estilo charla (Palatino, colores del tema, tamaño final), diagrama TikZ de flujo con cajas de borde negro y bucle, logos HARMONIE y BSC en portada y pie, compila sin errores y se revisaron las slides renderizadas.

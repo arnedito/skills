@@ -1,0 +1,51 @@
+%% Los ingredientes de un caso como selector: cada columna es un ingrediente, cada chip una opción.
+%% \ingredientes{esq}{estab}{tau}{sub}{les}{conv}{nombre}: enciende una opción por columna (vacío = ninguna)
+%% y las une con un trazo: la receta. Con todo vacío se ven solo las opciones.
+\makeatletter
+\newcommand\ing@opcion[4]{% #1 color, #2 clave, #3 seleccionada, #4 etiqueta
+  \ifnum\pdfstrcmp{#2}{#3}=0
+    \node[fill=#1,text=white,font=\footnotesize\bfseries\boldmath,ing chip] (n) at (\ing@x,\ing@y) {#4};
+    \ifx\ing@ultimo\empty\else
+      \begin{pgfonlayer}{background}\draw[tinta!45,line width=1.1pt] (\ing@ultimo) -- (n);\end{pgfonlayer}\fi
+    \edef\ing@ultimo{\ing@x,\ing@y}%
+  \else
+    \node[fill=#1!11,text=#1!75!black,font=\footnotesize,ing chip] at (\ing@x,\ing@y) {#4};
+  \fi
+  \pgfmathsetmacro\ing@y{\ing@y-0.68}}
+\newcommand\ing@columna[3]{% #1 color, #2 índice de columna, #3 título
+  \pgfmathsetmacro\ing@x{1.13+2.36*#2}\def\ing@y{-0.75}%
+  \node[anchor=base,font=\small\bfseries,text=#1] at (\ing@x,0) {#3};}
+\newcommand\ingredientes[7]{%
+  \begin{tikzpicture}[ing chip/.style={rounded corners=2pt,minimum width=2.12cm,minimum height=0.52cm,inner sep=1.5pt}]
+    \def\ing@ultimo{}%
+    \ing@columna{ingEsq}{0}{Esquema}
+      \ing@opcion{ingEsq}{imp}{#1}{implícito}
+      \ing@opcion{ingEsq}{exp}{#1}{explícito}
+    \ing@columna{ingEst}{1}{Estabilización}
+      \ing@opcion{ingEst}{no}{#2}{ninguna}
+      \ing@opcion{ingEst}{asgs}{#2}{ASGS}
+      \ing@opcion{ingEst}{oss}{#2}{OSS}
+      \ing@opcion{ingEst}{split}{#2}{SPLIT OSS}
+    \ing@columna{ingTau}{2}{Parámetros}
+      \ing@opcion{ingTau}{ambos}{#3}{$\tau_1$ y $\tau_2$}
+      \ing@opcion{ingTau}{t1}{#3}{$\tau_1 = 0$}
+      \ing@opcion{ingTau}{t2}{#3}{$\tau_2 = 0$}
+    \ing@columna{ingSub}{3}{Subescalas}
+      \ing@opcion{ingSub}{qs}{#4}{cuasiestáticas}
+      \ing@opcion{ingSub}{din}{#4}{dinámicas}
+    \ing@columna{ingLes}{4}{Modelo LES}
+      \ing@opcion{ingLes}{no}{#5}{ninguno (ILES)}
+      \ing@opcion{ingLes}{vreman}{#5}{Vreman}
+    \ing@columna{ingCon}{5}{Convección}
+      \ing@opcion{ingCon}{cons}{#6}{conservativa}
+      \ing@opcion{ingCon}{skew}{#6}{skew}
+      \ing@opcion{ingCon}{emac}{#6}{EMAC}
+    % la receta resultante (o la clave de lectura si no hay receta)
+    \node[anchor=west,inner sep=0pt] at (0.08,-4.05) {%
+      \if\relax\detokenize{#7}\relax
+        {\small\color{tenue}Un caso = una opción de cada columna}%
+      \else
+        {\color{tenue}\LARGE$=$}\enspace{\LARGE\caso{#7}}%
+      \fi};
+  \end{tikzpicture}}
+\makeatother

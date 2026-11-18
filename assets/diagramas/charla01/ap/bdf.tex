@@ -1,0 +1,20 @@
+%% BDF2: plantilla en el tiempo, e iteración no lineal hasta la tolerancia.
+\begin{tikzpicture}
+  % plantilla BDF2
+  \draw[tenue,-{Stealth[length=4pt]}] (0,0) -- (4.2,0) node[right,font=\scriptsize]{$t$};
+  \foreach \x/\l/\w in {0.6/n{-}1/1, 2/n/-4, 3.4/n{+}1/3} {
+    \fill[ingEsq] (\x,0) circle (2.4pt);
+    \node[below=3pt,font=\scriptsize] at (\x,0) {$t^{\l}$};
+    \node[above=4pt,font=\scriptsize\bfseries,text=ingEsq] at (\x,0) {$\w$};}
+  \node[font=\scriptsize,text=tenue] at (2,0.75) {pesos de $\boldsymbol u$, todo entre $2\,\delta t$};
+  % residuo frente a iteración
+  \begin{scope}[shift={(5.2,-0.55)},x=0.36cm,y=0.42cm]
+    \draw[tenue,-{Stealth[length=4pt]}] (0,0) -- (11,0) node[right,font=\scriptsize]{it.};
+    \draw[tenue,-{Stealth[length=4pt]}] (0,0) -- (0,3.6) node[above,font=\scriptsize]{residuo (log)};
+    \draw[ingEst,dashed] (0,0.9) -- (10.6,0.9) node[right,font=\tiny]{$10^{-3}$};
+    \draw[tenue,dashed] (10,0) -- (10,3.3) node[above,font=\tiny]{máx.\ 10};
+    \draw[ingSub,dashed] (3,0) -- (3,3.3) node[above,font=\tiny,text=ingSub!85!black]{red.\ 3};
+    \foreach \i/\r in {1/3.2,2/2.6,3/2.1,4/1.75,5/1.45,6/1.2,7/0.98,8/0.8} \fill[tinta] (\i,\r) circle (1.6pt);
+    \node[font=\tiny,text=tenue,anchor=west] at (7.2,1.45) {para aquí};
+  \end{scope}
+\end{tikzpicture}

@@ -1,0 +1,45 @@
+%% Mapa de casos ("recetas"), en dos slides: \recetasimp y \recetasexp. Solo se marca lo que se
+%% aparta de lo básico. Nombres: ~/pipe/GLOSSARY.md · carpetas: ../BRIEF-AIRE.md
+%% Se carga en el preámbulo (define macros).
+\newcommand\chip[2]{\tikz[baseline=(c.base)]\node[fill=#1,text=white,rounded corners=1.5pt,
+  inner sep=1.6pt,minimum width=1.12cm,font=\scriptsize\bfseries\boldmath](c){\strut#2};}
+% Estado de cada caso (no se dibuja: es para nosotros, no para la charla; ver notas del orador)
+\newcommand\hecho{}\newcommand\provisional{}\newcommand\pendiente{}\newcommand\encurso{}
+\newcommand\malla[1]{\hspace{0.5em}{\color{tenue}\scriptsize #1}}
+\def\blnumA{1}\def\blnumB{2}\def\blnumC{3}\def\blnumD{4}\def\blnumE{5}\def\blnumF{6}
+\newcommand\bl[1]{\tikz[baseline=(c.base)]\node[fill=bloque\csname blnum#1\endcsname,text=white,
+  minimum size=1.25em,inner sep=0pt,font=\scriptsize\bfseries](c){#1};\hspace{1.5pt}}
+% #1 = filas
+\newcommand\tablarecetas[1]{{\footnotesize\renewcommand\arraystretch{1.32}\setlength\tabcolsep{4pt}%
+  \begin{tabular}{@{}l c c c c c l@{}c@{}}
+    \toprule
+    {\color{tenue}Caso} & {\color{tenue}Estab.} & {\color{tenue}$\tau$} & {\color{tenue}Subesc.} &
+    {\color{tenue}LES} & {\color{tenue}Conv.} & {\color{tenue}Bloques} & \\
+    \midrule
+    #1
+    \bottomrule
+    \multicolumn{8}{@{}l}{\rule{0pt}{1.4em}\color{tenue}\scriptsize Todos en M1B salvo indicado.}
+  \end{tabular}}}
+
+\newcommand\recetasimp{\tablarecetas{%
+  \caso{imp asgs din}\malla{M1A--M2B}         & \chip{ingEst}{ASGS}  &                             & \chip{ingSub}{din} &                       &                     & \bl{B}\bl{C}\bl{D}\bl{E}\bl{F} & \hecho\\
+  \caso{imp asgs $\tau_2{=}0$ din}            & \chip{ingEst}{ASGS}  & \chip{ingTau}{$\tau_2{=}0$} & \chip{ingSub}{din} &                       &                     & \bl{D}             & \pendiente\\
+  \caso{imp oss din}\malla{M1B, M2B}          & \chip{ingEst}{OSS}   &                             & \chip{ingSub}{din} &                       &                     & \bl{C}\bl{D}\bl{F} & \hecho\\
+  \caso{imp oss $\tau_2{=}0$ din}             & \chip{ingEst}{OSS}   & \chip{ingTau}{$\tau_2{=}0$} & \chip{ingSub}{din} &                       &                     & \bl{D}             & \pendiente\\
+  \caso{imp oss $\tau_2{=}0$ din skew}        & \chip{ingEst}{OSS}   & \chip{ingTau}{$\tau_2{=}0$} & \chip{ingSub}{din} &                       & \chip{ingCon}{skew} & \bl{D}             & \pendiente\\
+  \caso{imp oss $\tau_2{=}0$ din + vreman}    & \chip{ingEst}{OSS}   & \chip{ingTau}{$\tau_2{=}0$} & \chip{ingSub}{din} & \chip{ingLes}{VREMAN} &                     & \bl{D}             & \pendiente\\
+  \caso{imp oss $\tau_1{=}0$ + vreman}        & \chip{ingEst}{OSS}   & \chip{ingTau}{$\tau_1{=}0$} &                    & \chip{ingLes}{VREMAN} &                     & \bl{D}             & \pendiente\\
+  \caso{imp split oss $\tau_1{=}0$ skew}      & \chip{ingEst}{SPLIT} & \chip{ingTau}{$\tau_1{=}0$} &                    &                       & \chip{ingCon}{skew} & \bl{C}\bl{D}\bl{F} & \hecho\\
+}}
+
+\newcommand\recetasexp{\tablarecetas{%
+  \caso{exp}\malla{M1B, M2B}                  &                      &                             &                    &                       &                     & \bl{C}\bl{D}       & \hecho\\
+  \caso{exp + vreman}\malla{M1A--M2B}         &                      &                             &                    & \chip{ingLes}{VREMAN} &                     & \bl{B}\bl{C}\bl{D} & \hecho\\
+  \caso{exp asgs}                             & \chip{ingEst}{ASGS}  &                             &                    &                       &                     & \bl{D}             & \provisional\\
+  \caso{exp asgs din}                         & \chip{ingEst}{ASGS}  &                             & \chip{ingSub}{din} &                       &                     & \bl{D}             & \encurso\\
+  \caso{exp oss}                              & \chip{ingEst}{OSS}   &                             &                    &                       &                     & \bl{D}             & \pendiente\\
+  \caso{exp oss $\tau_2{=}0$}                 & \chip{ingEst}{OSS}   & \chip{ingTau}{$\tau_2{=}0$} &                    &                       &                     & \bl{D}             & \provisional\\
+  \caso{exp oss $\tau_2{=}0$ din}             & \chip{ingEst}{OSS}   & \chip{ingTau}{$\tau_2{=}0$} & \chip{ingSub}{din} &                       &                     & \bl{D}             & \provisional\\
+  \caso{exp oss $\tau_2{=}0$ + vreman}        & \chip{ingEst}{OSS}   & \chip{ingTau}{$\tau_2{=}0$} &                    & \chip{ingLes}{VREMAN} &                     & \bl{D}             & \provisional\\
+  \caso{exp split oss $\tau_1{=}0$ + vreman}  & \chip{ingEst}{SPLIT} & \chip{ingTau}{$\tau_1{=}0$} &                    & \chip{ingLes}{VREMAN} &                     & \bl{D}             & \pendiente\\
+}}

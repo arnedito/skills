@@ -1,0 +1,33 @@
+%% Tabla de métodos (como tab:pipe-schemes del research plan, en castellano y con SPLIT OSS).
+%% Novedad respecto al plan: las estabilizaciones VMS se combinan con los dos esquemas (IMP y EXP).
+{\scriptsize\renewcommand\arraystretch{1.25}\setlength\tabcolsep{5pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{1.9cm} l l@{}}
+  \toprule
+  \multicolumn{1}{@{}l}{\color{tenue}Formulación} & \multicolumn{1}{l}{\color{tenue}Disipación} & {\color{tenue}Método} &
+  {\color{tenue}Subescala: cuasiestática \enspace|\enspace dinámica}\\
+  \midrule
+  \multirow{3}{2.3cm}{\raggedright\textbf{VMS estabilizado}\\{\color{tenue}Houzeaux 2008}}
+    & \multirow{3}{1.9cm}{\raggedright numérica\\{\color{tenue}(LES implícito)}}
+    & {\color{ingEst}\textbf{ASGS}}
+    & $\tilde{\boldsymbol u} = \tau_1\mathcal R(\boldsymbol u_h)$ \enspace|\enspace
+      $\rho\,\partial_t\tilde{\boldsymbol u} + \tau_1^{-1}\tilde{\boldsymbol u} = \mathcal R(\boldsymbol u_h)$\\
+  & & {\color{ingEst}\textbf{OSS}}
+    & $\tilde{\boldsymbol u} = \tau_1\,\Pi^\perp\!\big(\mathcal R(\boldsymbol u_h)\big)$ \enspace|\enspace
+      $\rho\,\partial_t\tilde{\boldsymbol u} + \tau_1^{-1}\tilde{\boldsymbol u} = \Pi^\perp\!\big(\mathcal R(\boldsymbol u_h)\big)$\\
+  & & {\color{ingEst}\textbf{SPLIT OSS}}
+    & $\tilde{\boldsymbol u} = \tau_1\big[\Pi^\perp(\rho\,\boldsymbol a\cdot\nabla\boldsymbol u_h) + \Pi^\perp(\nabla p_h)\big]$
+      \enspace|\enspace {\color{tenue}no implementada}\\[2pt]
+  \midrule
+  \textbf{Baja disipación}\newline{\color{tenue}Lehmkuhl 2019}
+    & viscosidad turbulenta {\color{tenue}(LES explícito)}
+    & {\color{ingLes}\textbf{Vreman}}
+    & $\nu_\mathrm{sgs} = c\,\sqrt{B_\beta/(\alpha_{ij}\alpha_{ij})}$, \enspace $c = 0.1$\\
+  \bottomrule
+\end{tabular}\\[8pt]
+\begin{tabular}{@{}l l@{}}
+  \tikz[baseline=(c.base)]\node[fill=ingEsq,text=white,rounded corners=1.5pt,inner sep=1.5pt,font=\tiny\bfseries](c){IMP};
+    & BDF2 · velocidad–presión monolítico, complemento de Schur con Orthomin(1) · $\Delta t = 10^{-4}$ s\\[2pt]
+  \tikz[baseline=(c.base)]\node[fill=ingEsq!15,text=ingEsq!80!black,rounded corners=1.5pt,inner sep=1.5pt,font=\tiny\bfseries](c){EXP};
+    & RK3 conservador de energía · presión por paso fraccionado · $\Delta t$ adaptativo (autovalores)\\
+\end{tabular}\\[4pt]
+{\color{tenue}Cualquier fila se combina con cualquiera de los dos esquemas.}}

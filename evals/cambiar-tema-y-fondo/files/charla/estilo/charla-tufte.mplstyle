@@ -1,0 +1,10 @@
+# Colores del tema 'tufte' (mismos HEX que tema-tufte.tex)
+axes.prop_cycle: cycler('color', ['A4161A', '5E5E5E', 'A8A8A8', '2B2B2B'])
+text.color: 222222
+axes.labelcolor: 222222
+axes.edgecolor: 9A9A9A
+xtick.color: 9A9A9A
+ytick.color: 9A9A9A
+xtick.labelcolor: 222222
+ytick.labelcolor: 222222
+grid.color: 9A9A9A

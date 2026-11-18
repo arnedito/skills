@@ -1,0 +1,15 @@
+%% Escala de tiempos de τ1 en el núcleo del pipe (eje log, órdenes de magnitud).
+\begin{tikzpicture}[x=0.92cm]
+  \draw[tenue,line width=0.6pt,-{Stealth[length=4pt]}] (0,0) -- (6.3,0) node[right,font=\scriptsize]{$t$ (s)};
+  \foreach \e/\x in {-6/0,-5/1.5,-4/3,-3/4.5,-2/6} {\draw[tenue] (\x,0.06) -- (\x,-0.06);
+    \node[below=2pt,font=\tiny,text=tenue] at (\x,0) {$10^{\e}$};}
+  \fill[ingTau] (2.07,0) circle (2.6pt) node[above=4pt,font=\scriptsize\bfseries,text=ingTau]{$\tau_1$};
+  \fill[tinta] (2.55,0) circle (2pt);
+  \node[font=\scriptsize,anchor=south west] at (2.5,0.35) {$t_\mathrm{conv} = h/|\boldsymbol a|$};
+  \draw[tinta,line width=0.4pt] (2.55,0.05) -- (2.62,0.35);
+  \fill[tinta] (5.55,0) circle (2pt) node[above=4pt,font=\scriptsize]{$t_\mathrm{dif} = h^2/\nu$};
+  \fill[ingEsq] (3.0,0) circle (2pt);
+  \node[font=\scriptsize,text=ingEsq,anchor=north] at (3.0,-0.38) {$\delta t$ (\caso{imp})};
+  \node[font=\scriptsize,text=tenue,align=center,anchor=north,text width=5cm] at (3.1,-0.85)
+    {$1/\tau_1$ suma los dos ritmos: manda el más rápido (la convección)};
+\end{tikzpicture}

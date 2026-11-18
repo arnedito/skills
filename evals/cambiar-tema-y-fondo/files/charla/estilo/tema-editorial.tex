@@ -1,0 +1,43 @@
+%% Tema 5 · Cálido editorial (crema y terracota, títulos grandes)
+\usetheme{default}
+\definecolor{fondo}{HTML}{F5EFE4}
+\definecolor{tinta}{HTML}{2A211C}
+\definecolor{tenue}{HTML}{9C8F80}
+\definecolor{regla}{HTML}{D8CCBA}
+\definecolor{acento}{HTML}{B4532A}
+\definecolor{serieA}{HTML}{B4532A}
+\definecolor{serieB}{HTML}{3E6B73}
+\definecolor{serieC}{HTML}{C9973B}
+\definecolor{serieD}{HTML}{6B7F4E}
+\definecolor{motivo}{HTML}{B4532A}
+\newlength\margenizq \setlength\margenizq{1.2cm}
+\newlength\margender \setlength\margender{1.2cm}
+\newlength\pieabajo  \setlength\pieabajo{3.5mm}
+\setbeamersize{text margin left=\margenizq,text margin right=\margender}
+\setbeamercolor{background canvas}{bg=fondo}
+\setbeamercolor{normal text}{fg=tinta,bg=fondo}
+\setbeamercolor{structure}{fg=acento}
+\setbeamercolor{frametitle}{fg=tinta}
+\setbeamercolor{title}{fg=tinta}
+\setbeamercolor{alerted text}{fg=acento}
+\setbeamercolor{footline}{fg=tenue}
+\setbeamerfont{frametitle}{size=\Large,series=\bfseries\boldmath}
+\setbeamerfont{title}{size=\huge,series=\bfseries\boldmath}
+\setbeamerfont{footline}{size=\scriptsize,shape=\scshape}
+\setbeamertemplate{frametitle}{%
+  \vspace*{0.5cm}{\footnotesize\scshape\color{acento}\insertsectionhead\par}\vspace*{0.05cm}
+  \usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par\ifx\insertframesubtitle\empty\else{\normalsize\mdseries\upshape\color{tenue}\insertframesubtitle\par}\fi\vspace*{0.15cm}}
+\setbeamertemplate{itemize item}{\color{acento}\textemdash}
+\setbeamertemplate{itemize subitem}{\color{tenue}\textendash}
+\setbeamertemplate{title page}{%
+  \fondo{\fondoportada}\logosportada\vfill
+  {\usebeamerfont{title}\inserttitle\par}\vspace{0.35cm}
+  {\color{acento}\rule{2.5cm}{2pt}\par}\vspace{0.35cm}
+  {\Large\itshape\insertsubtitle\par}\vspace{1cm}
+  {\scshape\insertauthor\par}
+  {\small\color{tenue}\insertinstitute\quad\insertdate\par}\vfill}
+\setbeamertemplate{section page}{%
+  \fondo[0.75]{\fondoseccion}  {\fontsize{64}{64}\selectfont\color{acento}\bfseries 0\thesection\par}\vspace{0.3cm}
+  {\usebeamerfont{title}\insertsectionhead\par}}
+\input{tema-comun-footline.tex}
+\AtBeginSection{\begin{frame}[plain,c]\usebeamertemplate{section page}\end{frame}}

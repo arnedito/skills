@@ -1,0 +1,19 @@
+%% Posición de los 5 witness en el eje del pipe (equiespaciados en z ≈ L/6 … 5L/6; posición aproximada:
+%% el .wit no trae coordenadas; confirmar en el .nsi.dat). Se resaltan los del espectro (2, 3, 4).
+\begin{tikzpicture}
+  \def\Lp{9.0}\def\Rp{0.38}\def\ex{0.15}
+  \shade[top color=black!18, bottom color=black!18, middle color=black!3]
+    (0,-\Rp) -- (\Lp,-\Rp) arc[start angle=-90,end angle=90,x radius=\ex,y radius=\Rp] -- (0,\Rp) -- cycle;
+  \fill[fondo] (0,0) ellipse[x radius=\ex,y radius=\Rp];
+  \draw[tinta,line width=0.6pt] (0,-\Rp) -- (\Lp,-\Rp) arc[start angle=-90,end angle=90,x radius=\ex,y radius=\Rp] -- (0,\Rp);
+  \draw[tinta,line width=0.6pt] (0,0) ellipse[x radius=\ex,y radius=\Rp];
+  \draw[tenue,dash pattern=on 2pt off 2pt] (0,0) -- (\Lp,0);
+  \foreach \i in {1,...,5} {
+    \pgfmathsetmacro\x{\i*\Lp/6}
+    \ifnum\i<2 \fill[tenue] (\x,0) circle (2pt);
+    \else\ifnum\i>4 \fill[tenue] (\x,0) circle (2pt);
+    \else \fill[ingEst] (\x,0) circle (2.6pt);\fi\fi
+    \node[above=4pt,font=\scriptsize] at (\x,\Rp) {\i};}
+  \draw[-{Stealth[length=5pt]},tinta] (\Lp+0.45,0) -- ++(0.7,0) node[right,font=\scriptsize]{$z$};
+  \node[anchor=west,font=\scriptsize,text=tenue,align=left] at (\Lp+0.4,0.55) {witness en el eje};
+\end{tikzpicture}

@@ -1,0 +1,10 @@
+# Colores del tema 'bloques' (mismos HEX que tema-bloques.tex)
+axes.prop_cycle: cycler('color', ['2E5EAA', 'E4572E', '0F8B8D', 'D98E04'])
+text.color: 1B1B2F
+axes.labelcolor: 1B1B2F
+axes.edgecolor: 8C8C99
+xtick.color: 8C8C99
+ytick.color: 8C8C99
+xtick.labelcolor: 1B1B2F
+ytick.labelcolor: 1B1B2F
+grid.color: 8C8C99

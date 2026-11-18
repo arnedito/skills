@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: cambiar-tema-y-fondo
+expected_outcome: |
+  La charla pasa a tema oscuro, fondo nariz en portada y separadores, progreso con barra, figuras regeneradas con colores del tema oscuro, todo legible (sin texto claro sobre relleno claro), compila y se revisaron las slides.
+context:
+  scaffold_script: place-files.sh

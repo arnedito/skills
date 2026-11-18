@@ -1,0 +1,46 @@
+# Estilo base de las figuras de las charlas (común a todos los temas).
+# Tipografía: la misma Palatino que las slides (mathpazo vía LaTeX).
+# Los colores van en charla-<tema>.mplstyle: plt.style.use([base, tema]).
+
+text.usetex: True
+text.latex.preamble: \usepackage[T1]{fontenc}\usepackage[sc]{mathpazo}
+font.family: serif
+font.size: 9
+axes.labelsize: 9
+axes.titlesize: 9
+legend.fontsize: 8
+xtick.labelsize: 8
+ytick.labelsize: 8
+
+figure.figsize: 3.8, 2.4
+figure.dpi: 150
+savefig.format: pdf
+savefig.bbox: tight
+savefig.pad_inches: 0.02
+savefig.transparent: True
+figure.facecolor: none
+axes.facecolor: none
+
+axes.spines.top: False
+axes.spines.right: False
+axes.linewidth: 0.6
+axes.labelpad: 3
+axes.grid: False
+axes.titlelocation: left
+
+xtick.direction: out
+ytick.direction: out
+xtick.major.size: 3
+ytick.major.size: 3
+xtick.minor.size: 1.6
+ytick.minor.size: 1.6
+xtick.major.width: 0.6
+ytick.major.width: 0.6
+xtick.minor.width: 0.5
+ytick.minor.width: 0.5
+
+lines.linewidth: 1.3
+lines.markersize: 3
+legend.frameon: False
+legend.handlelength: 1.8
+legend.borderaxespad: 0.2

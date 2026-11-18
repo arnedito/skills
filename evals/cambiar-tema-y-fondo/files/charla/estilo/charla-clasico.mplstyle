@@ -1,0 +1,10 @@
+# Colores del tema 'clasico' (mismos HEX que tema-clasico.tex)
+axes.prop_cycle: cycler('color', ['1B2A49', 'B08D57', '6B8CAE', '8C2F39'])
+text.color: 1E1E24
+axes.labelcolor: 1E1E24
+axes.edgecolor: 8A8A90
+xtick.color: 8A8A90
+ytick.color: 8A8A90
+xtick.labelcolor: 1E1E24
+ytick.labelcolor: 1E1E24
+grid.color: 8A8A90

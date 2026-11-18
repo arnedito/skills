@@ -1,0 +1,89 @@
+%% Tema 6 · Bloques (con más vidilla): un color por bloque de la charla, tira de progreso
+%% arriba, separadores a sangre con la letra del bloque. La charla fija \def\nbloques{N}.
+\usetheme{default}
+\providecommand\nbloques{5}
+\definecolor{fondo}{HTML}{FAFAF7}
+\definecolor{tinta}{HTML}{1B1B2F}
+\definecolor{tenue}{HTML}{8C8C99}
+\definecolor{regla}{HTML}{E3E3E8}
+\definecolor{acento}{HTML}{E4572E}
+\definecolor{serieA}{HTML}{2E5EAA}
+\definecolor{serieB}{HTML}{E4572E}
+\definecolor{serieC}{HTML}{0F8B8D}
+\definecolor{serieD}{HTML}{D98E04}
+\definecolor{motivo}{HTML}{FFFFFF}
+\def\logoportada{blanco}\def\colorprogreso{bloqueactual}
+\def\opacidadfondo{0.30}
+% un color por bloque (0 = portada)
+\definecolor{bloque0}{HTML}{1B1B2F}
+\definecolor{bloque1}{HTML}{2E5EAA}
+\definecolor{bloque2}{HTML}{E4572E}
+\definecolor{bloque3}{HTML}{0F8B8D}
+\definecolor{bloque4}{HTML}{D98E04}
+\definecolor{bloque5}{HTML}{6A4C93}
+\definecolor{bloque6}{HTML}{3D5A80}
+% secciones después de \nbloques (cierre, apéndice): neutras, sin letra
+\definecolor{bloque7}{HTML}{1B1B2F}
+\definecolor{bloque8}{HTML}{1B1B2F}
+\definecolor{bloque9}{HTML}{1B1B2F}
+\colorlet{bloqueactual}{bloque0} % color del bloque en curso (neutro fuera de los bloques)
+\newif\ifenbloque
+\newcommand\comprobarbloque{\enbloquefalse\ifnum\value{section}>0\relax\ifnum\value{section}>\nbloques\relax\else\enbloquetrue\fi\fi}
+\newlength\margenizq \setlength\margenizq{1.1cm}
+\newlength\margender \setlength\margender{1.1cm}
+\newlength\pieabajo  \setlength\pieabajo{3mm}
+\setbeamersize{text margin left=\margenizq,text margin right=\margender}
+\setbeamercolor{background canvas}{bg=fondo}
+\setbeamercolor{normal text}{fg=tinta,bg=fondo}
+\setbeamercolor{structure}{fg=tinta}
+\setbeamercolor{frametitle}{fg=tinta}
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{alerted text}{fg=acento}
+\setbeamercolor{footline}{fg=tenue}
+\setbeamerfont{frametitle}{size=\Large,series=\bfseries\boldmath}
+\setbeamerfont{title}{size=\huge,series=\bfseries\boldmath}
+\setbeamerfont{footline}{size=\scriptsize}
+% tira de progreso: bloques pasados en tono claro, el actual lleno, los futuros en gris
+\setbeamertemplate{headline}{%
+  \vspace*{3.5mm}\hspace*{\margenizq}%
+  \begin{tikzpicture}
+    \pgfmathsetmacro\anchob{(\paperwidth-\margenizq-\margender)/\nbloques}
+    \foreach \i in {1,...,\nbloques}{%
+      \ifnum\i<\value{section}\edef\colb{bloque\i!35}\else
+        \ifnum\i=\value{section}\edef\colb{bloque\i}\else\def\colb{regla}\fi\fi
+      \fill[fill=\colb] ({(\i-1)*\anchob pt},0) rectangle ({\i*\anchob pt-3pt},2pt);}
+  \end{tikzpicture}}
+\setbeamertemplate{frametitle}{%
+  \vspace*{0.3cm}\usebeamerfont{frametitle}%
+  \comprobarbloque\ifenbloque
+    \sbox0{\tikz[baseline=(b.base)]\node[fill=bloqueactual,text=white,minimum size=1.35em,
+      inner sep=0pt,font=\normalsize\bfseries](b){\Alph{section}};}\hangindent=\dimexpr\wd0+0.45em\relax\hangafter=1\noindent\usebox0\hspace{0.45em}\fi
+  \usebeamercolor[fg]{frametitle}\insertframetitle\par\ifx\insertframesubtitle\empty\else{\normalsize\mdseries\upshape\color{tenue}\insertframesubtitle\par}\fi\vspace*{0.15cm}}
+\setbeamertemplate{itemize item}{\color{bloqueactual}\raisebox{0.2ex}{\rule{0.55ex}{0.55ex}}}
+\setbeamertemplate{itemize subitem}{\color{tenue}\textendash}
+\setbeamertemplate{title page}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[tinta] (current page.south west) rectangle (current page.north east);
+    \foreach \i in {1,...,\nbloques}{\fill[bloque\i] ($(current page.south west)+({(\i-1)*\paperwidth/\nbloques},0)$)
+      rectangle ++({\paperwidth/\nbloques},4pt);}
+  \end{tikzpicture}%
+  \fondo{\fondoportada}\adorno\logosportada\vfill
+  \begin{minipage}{0.6\textwidth}\raggedright
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}\vspace{0.3cm}
+  {\Large\color{white!75!tinta}\insertsubtitle\par}\vspace{1cm}
+  {\color{white}\insertauthor\par}
+  {\small\color{white!55!tinta}\insertinstitute\par\insertdate\par}
+  \end{minipage}\vfill\reservalogos}
+\setbeamertemplate{section page}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[bloqueactual] (current page.south west) rectangle (current page.north east);
+  \end{tikzpicture}%
+  \fondo[0.75]{\fondoseccion}%
+  \comprobarbloque\ifenbloque{\fontsize{84}{84}\selectfont\bfseries\color{white}\Alph{section}\par}\vspace{0.25cm}\fi
+  {\usebeamerfont{title}\color{white}\insertsectionhead\par}}
+\AtBeginSection{%
+  \comprobarbloque\ifenbloque\colorlet{bloqueactual}{bloque\arabic{section}}\else\colorlet{bloqueactual}{bloque0}\fi
+  \comprobarbloque\ifenbloque\setbeamercolor{alerted text}{fg=bloque\arabic{section}}%
+  \else\setbeamercolor{alerted text}{fg=acento}\fi
+  \begin{frame}[plain,c]\usebeamertemplate{section page}\end{frame}}
+\input{tema-comun-footline.tex}

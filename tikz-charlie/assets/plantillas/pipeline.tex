@@ -1,0 +1,20 @@
+%% PATRÓN · Pipeline: una cadena de etapas iguales y, debajo, lo que sale de una de ellas.
+%% Cajas neutras (caja=fondo); la novedad o el foco con caja=acento!10!fondo. Todas del mismo tamaño (anchor=north + \dx fijo): la regularidad es lo que se lee como
+%% cadena. Color por familia de etapa; la novedad, en otro color. Original: charla01/aire.tex.
+\begin{tikzpicture}[
+    caja/.style={fill=#1,draw=tinta,line width=0.6pt,rounded corners=3pt,
+      text width=2.72cm,minimum height=2.05cm,align=left,inner sep=5pt,font=\footnotesize,anchor=north},
+    flecha/.style={-{Stealth[length=5pt]},tinta,line width=0.8pt}]
+  \def\dx{3.56}
+  \node[caja=fondo] (a) at (0,0)      {\textbf{Simulación}\\ campos y promedios en $t$};
+  \node[caja=fondo] (b) at (\dx,0)    {\textbf{Conversión}\\ formato de lectura};
+  \node[caja=fondo] (c) at (2*\dx,0)  {\textbf{Postproceso}\\ promedios en las direcciones homogéneas};
+  \node[caja=fondo] (d) at (3*\dx,0)  {\textbf{Comparación}\\ frente a la referencia\\ {\color{tenue}error L2}};
+  % flechas a altura fija (si una caja crece, no se inclinan)
+  \foreach \i/\j in {a/b,b/c,c/d} \draw[flecha] ([yshift=-1cm]\i.north east) -- ([yshift=-1cm]\j.north west);
+  \node[anchor=south west,font=\scriptsize,text=tenue,inner sep=0pt] at (-1.56,-2.62) {Lo que sale del \textbf{postproceso}};
+  \node[caja=fondo] at (0,-2.75)      {\textbf{Perfiles}\\ medias y fluctuaciones};
+  \node[caja=fondo] at (\dx,-2.75)    {\textbf{Pared}\\ esfuerzo y velocidad de fricción};
+  \node[caja=fondo] at (2*\dx,-2.75)  {\textbf{Sondas}\\ series $\to$ espectros};
+  \node[caja=acento!10!fondo,draw=acento] at (3*\dx,-2.75)  {\textbf{Nuevo}\\ iteraciones y coste};
+\end{tikzpicture}

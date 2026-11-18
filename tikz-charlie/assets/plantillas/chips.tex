@@ -1,0 +1,21 @@
+%% PATRÓN · Tabla de chips: un caso por fila; solo se marca lo que se aparta de lo básico (celda vacía =
+\providecolor{textochip}{named}{white} % por si la charla tiene un estilo/ anterior a 1.1.0
+%% opción por defecto). Los chips repiten los colores del selector. Más de ~9 filas: partir en dos slides.
+%% Uso: \input{diagramas/chips.tex} en el preámbulo (define macros) y \tablacasos{filas} en el frame.
+%% Original: charla01/recetas.tex (con columna de bloques donde sale cada caso).
+\newcommand\chip[2]{\tikz[baseline=(chip@.base)]\node[fill=#1,text=textochip,rounded corners=1.5pt,
+  inner sep=1.6pt,minimum width=1.12cm,font=\scriptsize\bfseries\boldmath](chip@){\strut#2};}
+\newcommand\nota[1]{\hspace{0.5em}{\color{tenue}\scriptsize #1}}
+\newcommand\tablacasos[1]{{\footnotesize\renewcommand\arraystretch{1.32}\setlength\tabcolsep{5pt}%
+  \begin{tabular}{@{}l c c c c@{}}
+    \toprule
+    {\color{tenue}Caso} & {\color{tenue}Esquema} & {\color{tenue}Estab.} & {\color{tenue}Subesc.} & {\color{tenue}LES}\\
+    \midrule
+    #1
+    \bottomrule
+    \multicolumn{5}{@{}l}{\rule{0pt}{1.4em}\color{tenue}\scriptsize Celda vacía: como la referencia.}% nota corta: más ancha que la tabla, la estira
+  \end{tabular}}}
+%% Ejemplo:
+%% \tablacasos{%
+%%   \caso{imp asgs din}\nota{4 mallas} & & \chip{serieB}{ASGS} & \chip{serieC}{din} &                      \\
+%%   \caso{exp + vreman}                & \chip{serieA}{EXP} &                     &                    & \chip{serieD}{VREMAN}\\}

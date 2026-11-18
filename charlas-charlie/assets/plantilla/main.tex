@@ -1,0 +1,40 @@
+% __NOMBRE__ · creada con charlas-charlie el __FECHA__ (estilo v__VERSION__, copiado en estilo/)
+% Compilar:  latexmk -pdf main.tex        Notas del orador:  latexmk -pdf -usepretex='\def\connotas{}' main.tex
+% Figuras:   python make_figs.py          Decisiones de la charla: BRIEF.md
+\documentclass[aspectratio=169,11pt]{beamer}
+\def\tema{__TEMA__}          % bloques | metropolis | clasico | tufte | oscuro | editorial
+\def\idioma{__IDIOMA__}      % english | spanish
+\def\nbloques{3}             % solo Bloques: nº de secciones con letra y color (las de después, neutras)
+\def\logos{harmonie,bsc}     % también upc; \def\logos{} sin logos
+\def\fondoportada{}          % vacío | pulmones | nariz | pulmones-original | malla | remolinos | figs/mi-fondo.png
+% \def\fondoseccion{}       % fondo de los separadores (por defecto, el de la portada)
+% \def\sangrado{2.6cm}      % cuánto se sale el fondo por la derecha
+\def\progreso{numeros}       % numeros | barra | ambos
+\makeatletter\def\input@path{{estilo/}}\makeatother
+\input{preambulo}
+
+\title{__TITULO__}
+\subtitle{}
+\author{__AUTOR__}
+\institute{__INSTITUCION__}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+%======================================================================
+\section{__SECCION__}
+
+\begin{frame}{__MENSAJE__}
+  \noindent __CUERPO__
+  \note{Qué contar aquí y de dónde salen los datos.}
+\end{frame}
+
+\begin{frame}[c]
+  \frase{__FRASE__}
+\end{frame}
+
+\end{document}

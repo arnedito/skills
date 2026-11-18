@@ -1,0 +1,9 @@
+%% Pie común de los temas propios: a la izquierda \pieizquierda (por defecto, la sección); a la derecha
+%% los logos pequeños y n / N; debajo, la barra de progreso si \progreso es barra o ambos.
+\providecommand\pieizquierda{\insertsectionhead}
+\setbeamertemplate{footline}{%
+  \leavevmode\hbox to \paperwidth{%
+    \hspace*{\margenizq}\usebeamerfont{footline}\usebeamercolor[fg]{footline}%
+    \pieizquierda\hfill\logospie\numeropie
+    \hspace*{\margender}}%
+  \vspace*{\pieabajo}\barrapie}

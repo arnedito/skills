@@ -1,0 +1,10 @@
+# Colores del tema 'editorial' (mismos HEX que tema-editorial.tex)
+axes.prop_cycle: cycler('color', ['B4532A', '3E6B73', 'C9973B', '6B7F4E'])
+text.color: 2A211C
+axes.labelcolor: 2A211C
+axes.edgecolor: 9C8F80
+xtick.color: 9C8F80
+ytick.color: 9C8F80
+xtick.labelcolor: 2A211C
+ytick.labelcolor: 2A211C
+grid.color: 9C8F80

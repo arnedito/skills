@@ -1,0 +1,38 @@
+%% Un paso de tiempo del esquema explícito de baja disipación (Lehmkuhl et al. 2019, ec. 20–25):
+%% δt por autovalores + s etapas de Runge–Kutta, cada una con predictor, Poisson y corrección.
+\begin{tikzpicture}[
+    caja/.style={fill=#1!12,draw=tinta,line width=0.6pt,rounded corners=3pt,align=left,inner sep=5pt,
+      font=\scriptsize,text width=3.15cm,minimum height=1.45cm},
+    sol/.style={fill=#1,text=white,rounded corners=1.5pt,inner sep=1.4pt,font=\tiny\bfseries,minimum height=0pt,minimum width=0pt,text width={},align=center},
+    flecha/.style={-{Stealth[length=5pt]},tinta,line width=0.8pt}]
+  \newcommand\con{\tikz[baseline=(c.base)]\node[sol=ingTau](c){CONTINUITY};}
+  % --- paso de tiempo ---
+  \node[caja=ingEsq,text width=2.2cm,minimum height=3.3cm] (dt) at (1.35,0)
+    {\textbf{0 · Elegir $\delta t$}\\[3pt]
+     autovalores de convección y difusión (Gershgorin)\\[3pt]
+     + región de estabilidad del RK\\[3pt]
+     {\color{tenue}$\delta t = 0.9\,\delta t_\mathrm{opt}$, no es CFL}};
+  % --- etapas del RK, en ciclo ---
+  \node[caja=ingLes,anchor=north west] (F) at (3.7,1.65)
+    {\textbf{1 · Fuerzas $\boldsymbol F_i$}\\ convección EMAC + viscosidad\\ {\color{tenue}+ $\nu_\mathrm{sgs}$ (Vreman) · + VMS si estabilizado}};
+  \node[caja=ingLes,right=0.55cm of F,text width=3.55cm] (P)
+    {\textbf{2 · Predictor}\\ $\boldsymbol U^{i,*} = \boldsymbol U^n + \delta t\,M^{-1}\textstyle\sum_j a_{ij}\boldsymbol F_j$};
+  \node[caja=ingTau,below=0.4cm of P,text width=3.55cm] (Po)
+    {\textbf{3 · Poisson} \con\\ $DM^{-1}G\,\Phi^i = \frac{1}{c_i\delta t}(D\boldsymbol U^{i,*} - R_c)$};
+  \node[caja=ingLes,below=0.4cm of F] (Co)
+    {\textbf{4 · Corrección}\\ $\boldsymbol U^i = \boldsymbol U^{i,*} - c_i\delta t\,M^{-1}G\,\Phi^i$};
+  \draw[flecha] (F) -- (P); \draw[flecha] (P) -- (Po); \draw[flecha] (Po) -- (Co);
+  \draw[flecha,ingLes] (Co.west) -- ++(-0.25,0) |- node[pos=0.25,right,font=\scriptsize,text=ingLes!80!black,align=left]{} (F.west);
+  \node[font=\scriptsize,text=ingLes!80!black,align=center] at ($(F.south)!0.5!(Co.north)$) {siguiente etapa $i{+}1$};
+  \begin{scope}[on background layer]
+    \node[fill=tinta!4,rounded corners=5pt,inner xsep=12pt,inner ysep=10pt,fit=(F)(P)(Po)(Co)] (rk) {};
+  \end{scope}
+  \node[anchor=south west,font=\scriptsize\bfseries,inner sep=1pt] at ($(rk.north west)+(0.15,0.02)$)
+    {Etapas $i = 1\dots s$ del RK 3p5q(4) {\mdseries\color{tenue}(conserva energía)}};
+  \draw[flecha] (dt) -- (rk.west |- dt);
+  % --- entrada y salida ---
+  \draw[flecha] ($(dt.west)+(-0.6,0)$) node[left,font=\small]{$n$} -- (dt.west);
+  \draw[flecha] (rk.east) -- ++(0.5,0) node[right,font=\small,align=left]{$n{+}1$};
+  \node[anchor=north,font=\scriptsize,text=tenue,align=center,text width=8.5cm] at ($(rk.south)+(0,-0.12)$)
+    {Al final, combinación con los $b_i$ y un último Poisson. No hay sistema de momento: solo la presión.};
+\end{tikzpicture}

@@ -1,0 +1,10 @@
+# Colores del tema 'metropolis' (mismos HEX que tema-metropolis.tex)
+axes.prop_cycle: cycler('color', ['1F4E79', 'E07A1F', '6A9FCB', '9A2B2B'])
+text.color: 23373B
+axes.labelcolor: 23373B
+axes.edgecolor: 7A868C
+xtick.color: 7A868C
+ytick.color: 7A868C
+xtick.labelcolor: 23373B
+ytick.labelcolor: 23373B
+grid.color: 7A868C

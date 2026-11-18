@@ -1,0 +1,9 @@
+%% Energía cinética frente al tiempo sin viscosidad: lo ideal, lo que disipa de más y lo inestable.
+\begin{tikzpicture}[x=1.0cm,y=1.6cm]
+  \draw[tenue,-{Stealth[length=4pt]}] (0,0) -- (5.6,0) node[right,font=\scriptsize]{$t$};
+  \draw[tenue,-{Stealth[length=4pt]}] (0,0) -- (0,1.75) node[above,font=\scriptsize]{$E/E_0$};
+  \draw[tenue,dashed] (0,1) -- (5.3,1); \node[left,font=\tiny,text=tenue] at (0,1) {1};
+  \draw[ingLes,line width=1.3pt] (0,1) -- (5.2,1) node[right,font=\scriptsize,align=left]{conserva:\\ esquema\\ de Lehmkuhl};
+  \draw[ingEsq,line width=1.1pt,domain=0:5.2,samples=40] plot (\x,{exp(-0.22*\x)}) node[right,font=\scriptsize]{disipa de más};
+  \draw[ingEst,line width=1.1pt,domain=0:3.3,samples=40] plot (\x,{1+0.025*(exp(1.15*\x)-1)}) node[above,font=\scriptsize]{inestable};
+\end{tikzpicture}

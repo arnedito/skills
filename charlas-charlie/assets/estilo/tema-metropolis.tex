@@ -1,0 +1,24 @@
+%% Tema 1 · Metropolis azul (sobrio; el de encaje_tutores)
+\usetheme[progressbar=frametitle,numbering=fraction,sectionpage=progressbar,block=fill]{metropolis}
+\definecolor{fondo}{HTML}{FFFFFF}
+\definecolor{tinta}{HTML}{23373B}
+\definecolor{tenue}{HTML}{7A868C}
+\definecolor{regla}{HTML}{D5DADD}
+\definecolor{acento}{HTML}{E07A1F}
+\definecolor{serieA}{HTML}{1F4E79}
+\definecolor{serieB}{HTML}{E07A1F}
+\definecolor{serieC}{HTML}{6A9FCB}
+\definecolor{serieD}{HTML}{9A2B2B}
+\definecolor{motivo}{HTML}{1F4E79}
+\setbeamercolor{normal text}{fg=tinta,bg=fondo}
+\setbeamercolor{frametitle}{fg=white,bg=serieA}
+\setbeamercolor{progress bar}{fg=acento,bg=serieA!25}
+\setbeamercolor{alerted text}{fg=acento}
+\setbeamercolor{footline}{fg=tenue}
+\setbeamerfont{footline}{size=\scriptsize}
+\newlength\margenizq \setlength\margenizq{0.7cm}
+\newlength\margender \setlength\margender{0.7cm}
+\newlength\pieabajo  \setlength\pieabajo{2.5mm}
+\input{tema-comun-footline.tex}
+\addtobeamertemplate{title page}{\fondo{\fondoportada}\logosportada}{}
+\addtobeamertemplate{section page}{\fondo[0.75]{\fondoseccion}}{}

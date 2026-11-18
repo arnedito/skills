@@ -1,0 +1,14 @@
+%% Orden de las llamadas a los solvers en una iteración no lineal (Orthomin(1) que conserva la continuidad).
+\begin{tikzpicture}[
+    ch/.style={fill=#1,text=white,rounded corners=1.5pt,inner sep=2.5pt,font=\tiny\bfseries,minimum width=1.9cm},
+    flecha/.style={-{Stealth[length=4pt]},tinta,line width=0.7pt}]
+  \node[font=\scriptsize\bfseries,text=ingEsq] at (0,0.55) {MOMENTUM};
+  \node[font=\scriptsize\bfseries,text=ingTau] at (2.5,0.55) {CONTINUITY};
+  \draw[ingEsq!30,line width=0.6pt] (0,0.3) -- (0,-3.2); \draw[ingTau!30,line width=0.6pt] (2.5,0.3) -- (2.5,-3.2);
+  \node[ch=ingEsq] (a) at (0,0) {paso 1: $\boldsymbol u$};
+  \node[ch=ingTau] (b) at (2.5,-0.9) {paso 3: $z$};
+  \node[ch=ingEsq] (c) at (0,-1.8) {paso 4: $\boldsymbol v$};
+  \node[ch=ingTau] (d) at (2.5,-2.7) {paso 9: $z$};
+  \draw[flecha] (a) -- (b); \draw[flecha] (b) -- (c); \draw[flecha] (c) -- (d);
+  \node[font=\scriptsize,align=center,anchor=north] at (1.25,-3.3) {1 iteración no lineal\\ $\Rightarrow$ 2 líneas en cada \texttt{.sol}};
+\end{tikzpicture}

@@ -1,0 +1,41 @@
+%% Un paso de tiempo del esquema implícito (Alya nastin): BDF2 + iteración no lineal +
+%% Orthomin(1) que conserva la continuidad (Houzeaux et al. 2011, Algoritmo 5) + subescalas dinámicas.
+\begin{tikzpicture}[
+    caja/.style={fill=#1!12,draw=tinta,line width=0.6pt,rounded corners=3pt,align=left,inner sep=5pt,font=\scriptsize},
+    sol/.style={fill=#1,text=white,rounded corners=1.5pt,inner sep=1.4pt,font=\tiny\bfseries,minimum height=0pt,minimum width=0pt,text width={},align=center},
+    flecha/.style={-{Stealth[length=5pt]},tinta,line width=0.8pt}]
+  \newcommand\mom{\tikz[baseline=(c.base)]\node[sol=ingEsq](c){MOMENTUM};}
+  \newcommand\con{\tikz[baseline=(c.base)]\node[sol=ingTau](c){CONTINUITY};}
+  % --- las tres piezas de una iteración no lineal ---
+  \node[caja=ingEst,text width=2.3cm,minimum height=3.3cm] (ens) at (1.95,0)
+    {\textbf{1 · Ensamblar}\\[3pt]
+     Galerkin + VMS\\ ($\tau_1$, $\tau_2$)\\[3pt]
+     BDF2 en $t$\\ {\color{tenue}(Euler los 20 primeros pasos)}\\[3pt]
+     {\color{tenue}OSS: proyección de la it.\ anterior}};
+  \node[caja=ingEsq,text width=5.2cm,minimum height=3.3cm,right=0.4cm of ens] (sch)
+    {\textbf{2 · Schur: Orthomin(1)}, conserva la continuidad\\[4pt]
+     \begin{tabular}{@{}l@{\hspace{4pt}}l@{}}
+       \mom & $A_{uu}\,\boldsymbol u = \boldsymbol b_u - A_{up}\,p$\\[2pt]
+       \con & $Q\,z = r$\\[2pt]
+       \mom & $A_{uu}\,\boldsymbol v = A_{up}\,z$\\[2pt]
+             & $\alpha$ óptimo; actualiza $\boldsymbol u$, $p$\\[2pt]
+       \con & $Q\,z = r^{+}$; corrige $\boldsymbol u$
+     \end{tabular}\\[3pt]
+     {\color{tenue}\tiny GMRES + DIAGONAL · DEFLATED\_CG + LINELET · PRECONDITIONER: DT}};
+  \node[caja=ingSub,text width=2.3cm,minimum height=3.3cm,right=0.4cm of sch] (sub)
+    {\textbf{3 · Subescalas}\\[3pt]
+     {\footnotesize$\partial_t\tilde{\boldsymbol u} + \tau_1^{-1}\tilde{\boldsymbol u}$}\\ {\footnotesize$= \mathcal P(\mathcal R_u)$}\\[3pt]
+     Newton por elemento\\ {\color{tenue}tol $10^{-5}$}\\[3pt]
+     {\color{tenue}solo en casos \caso{din}}};
+  \draw[flecha] (ens) -- (sch); \draw[flecha] (sch) -- (sub);
+  % --- marco de la iteración no lineal y su vuelta ---
+  \begin{scope}[on background layer]
+    \node[fill=tinta!4,rounded corners=5pt,inner xsep=8pt,inner ysep=10pt,fit=(ens)(sch)(sub)] (it) {};
+  \end{scope}
+  \node[anchor=south west,font=\scriptsize\bfseries,inner sep=1pt] at ($(it.north west)+(0.15,0.02)$) {Iteración no lineal};
+  \draw[flecha,ingEst] (sub.south) -- ++(0,-0.62) -| node[pos=0.25,below,font=\scriptsize,text=tinta]
+    {¿residuo $> 10^{-3}$? otra iteración (máx.\ 10)} (ens.south);
+  % --- entrada y salida del paso ---
+  \draw[flecha] ($(it.west)+(-0.65,0)$) node[left,font=\small]{$n$} -- (it.west);
+  \draw[flecha] (it.east) -- ++(0.55,0) node[right,font=\small]{$n{+}1$};
+\end{tikzpicture}

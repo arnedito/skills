@@ -1,0 +1,31 @@
+%% Nonlinear iteration loop shared by Picard and Newton (from the charlas-charlie template flujo.tex).
+%% Steps 1 and 3 are common (serieC); step 2, where the methods differ, in serieB.
+%% Picard in serieA and Newton in serieD, the same colours as in figs/convergencia.pdf.
+\begin{tikzpicture}[
+    caja/.style={fill=#1!12!fondo,draw=tinta,line width=0.6pt,rounded corners=3pt,align=left,inner sep=5pt,
+      font=\scriptsize,text width=2.7cm,minimum height=2.9cm},
+    sol/.style={fill=#1,text=white,rounded corners=1.5pt,inner sep=1.4pt,font=\tiny\bfseries,
+      minimum height=0pt,minimum width=0pt,text width={},align=center},   % TikZ anidado: resetear
+    flecha/.style={-{Stealth[length=5pt]},tinta,line width=0.8pt}]
+  \newcommand\etiqueta[2]{\tikz[baseline=(c.base)]\node[sol=#1](c){#2};}
+  \node[caja=serieC] (a) at (0,0)
+    {\textbf{1 · Residual}\\[3pt] $R(u^k) = A(u^k)\,u^k - f$\\[3pt] {\color{tenue}same for both}};
+  \node[caja=serieB,right=0.45cm of a,text width=3.9cm] (b)
+    {\textbf{2 · Linearize and solve}\\[5pt]
+     {\color{serieA}\textbf{Picard}} \etiqueta{serieA}{CG}\\[1pt] $A(u^k)\,u^{k+1} = f$\\
+     {\color{tenue}symmetric, $k$ frozen}\\[5pt]
+     {\color{serieD}\textbf{Newton}} \etiqueta{serieD}{GMRES}\\[1pt] $J(u^k)\,\delta u = -R(u^k)$\\
+     {\color{tenue}non-symmetric, with $k'(u)$}};
+  \node[caja=serieC,right=0.45cm of b] (c)
+    {\textbf{3 · Update}\\[3pt] $u^{k+1} = u^k + \delta u$\\[3pt] {\color{tenue}Picard: $u^{k+1}$ directly}};
+  \draw[flecha] (a) -- (b); \draw[flecha] (b) -- (c);
+  \begin{scope}[on background layer]
+    \node[fill=tinta!4!fondo,rounded corners=5pt,inner xsep=8pt,inner ysep=10pt,fit=(a)(b)(c)] (it) {};
+  \end{scope}
+  \node[anchor=south west,font=\scriptsize\bfseries,inner sep=1pt] at ($(it.north west)+(0.15,0.02)$)
+    {Nonlinear iteration $k \to k{+}1$};
+  \draw[flecha,acento] (c.south) -- ++(0,-0.62) -| node[pos=0.25,below,font=\scriptsize,text=tinta]
+    {$\|R(u^{k+1})\| / \|R(u^0)\| > 10^{-8}$? \ iterate again} (a.south);
+  \draw[flecha] ($(it.west)+(-0.55,0)$) node[left,font=\small]{$u^0$} -- (it.west);
+  \draw[flecha] (it.east) -- ++(0.45,0) node[right,font=\small]{$u$};
+\end{tikzpicture}

@@ -1,0 +1,10 @@
+# Colores del tema 'oscuro' (mismos HEX que tema-oscuro.tex)
+axes.prop_cycle: cycler('color', ['4FC3F7', 'FFB74D', 'A5D6A7', 'F48FB1'])
+text.color: E8E6E3
+axes.labelcolor: E8E6E3
+axes.edgecolor: 8A9099
+xtick.color: 8A9099
+ytick.color: 8A9099
+xtick.labelcolor: E8E6E3
+ytick.labelcolor: E8E6E3
+grid.color: 8A9099

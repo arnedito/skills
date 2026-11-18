@@ -1,0 +1,6 @@
+\documentclass{article}\usepackage[paperwidth=25cm,paperheight=22.5cm,margin=0.4cm]{geometry}
+\usepackage{graphicx,pgffor}\pagestyle{empty}\setlength\parindent{0pt}
+\begin{document}\centering
+\foreach \f/\t in {p-bloques-pulmones/bloques · pulmones,p-clasico-nariz/clasico · nariz,p-oscuro-nariz/oscuro · nariz,p-editorial-pulmones-original/editorial · pulmones-original,p-tufte-pulmones/tufte · pulmones,p-metropolis-nariz/metropolis · nariz}{%
+\begin{minipage}{11.9cm}\centering\fbox{\includegraphics[width=11.6cm]{\f.pdf}}\\[-1pt]{\small\sffamily\t}\end{minipage}\hspace{2mm}}
+\end{document}

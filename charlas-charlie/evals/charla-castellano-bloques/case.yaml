@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: charla-castellano-bloques
+expected_outcome: |
+  Charla en castellano con tema bloques, selector de ingredientes con overlays que recorre 2-3 casos, tabla de chips de casos, portada con logos HARMONIE+BSC y fondo pulmones, bloques con slide-frase, compila sin errores y se revisaron las slides renderizadas.

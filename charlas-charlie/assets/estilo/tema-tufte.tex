@@ -1,0 +1,40 @@
+%% Tema 3 · Minimal tipo Tufte (blanco, márgenes amplios, un solo acento)
+\usetheme{default}
+\definecolor{fondo}{HTML}{FFFFFF}
+\definecolor{tinta}{HTML}{222222}
+\definecolor{tenue}{HTML}{9A9A9A}
+\definecolor{regla}{HTML}{E0E0E0}
+\definecolor{acento}{HTML}{A4161A}
+\definecolor{serieA}{HTML}{A4161A}
+\definecolor{serieB}{HTML}{5E5E5E}
+\definecolor{serieC}{HTML}{A8A8A8}
+\definecolor{serieD}{HTML}{2B2B2B}
+\definecolor{motivo}{HTML}{A4161A}
+\newlength\margenizq \setlength\margenizq{1.5cm}
+\newlength\margender \setlength\margender{1.5cm}
+\newlength\pieabajo  \setlength\pieabajo{4mm}
+\setbeamersize{text margin left=\margenizq,text margin right=\margender}
+\setbeamercolor{normal text}{fg=tinta,bg=fondo}
+\setbeamercolor{structure}{fg=tinta}
+\setbeamercolor{frametitle}{fg=tinta}
+\setbeamercolor{title}{fg=tinta}
+\setbeamercolor{alerted text}{fg=acento}
+\setbeamercolor{footline}{fg=tenue}
+\setbeamerfont{frametitle}{size=\Large,shape=\itshape}
+\setbeamerfont{title}{size=\huge,shape=\itshape}
+\setbeamerfont{footline}{size=\tiny}
+\setbeamertemplate{frametitle}{\vspace*{0.7cm}\usebeamerfont{frametitle}\insertframetitle\par\ifx\insertframesubtitle\empty\else{\normalsize\mdseries\upshape\color{tenue}\insertframesubtitle\par}\fi\vspace*{0.15cm}}
+\setbeamertemplate{itemize item}{\color{tenue}\textendash}
+\setbeamertemplate{itemize subitem}{\color{tenue}\textperiodcentered}
+\setbeamertemplate{title page}{%
+  \fondo{\fondoportada}\logosportada\vfill
+  {\usebeamerfont{title}\inserttitle\par}\vspace{0.3cm}
+  {\large\insertsubtitle\par}\vspace{1.1cm}
+  {\insertauthor\par}
+  {\small\color{tenue}\insertinstitute\quad\insertdate\par}\vfill\reservalogos}
+\setbeamertemplate{section page}{%
+  \fondo[0.75]{\fondoseccion}  {\color{tenue}\Large\thesection\par}\vspace{0.2cm}
+  {\usebeamerfont{title}\insertsectionhead\par}}
+\def\pieizquierda{}% Tufte: solo logos y número, sin sección
+\input{tema-comun-footline.tex}
+\AtBeginSection{\begin{frame}[plain,c]\usebeamertemplate{section page}\end{frame}}

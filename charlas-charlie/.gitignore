@@ -1,0 +1,16 @@
+.DS_Store
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+render/
+__pycache__/
+docs/**/*.pdf
+docs/**/*-hoja.png
+docs/**/*-temas.png
+!docs/muestra/figs/*.pdf

@@ -1,0 +1,14 @@
+%% Paso fraccionado: el predictor deja divergencia; restar δt∇Φ la quita.
+\begin{tikzpicture}[flecha/.style={-{Stealth[length=3pt]},line width=0.7pt}]
+  \begin{scope}
+    \foreach \x in {0,0.5,...,2} \foreach \y in {0,0.5,...,1.5} {
+      \pgfmathsetmacro\dx{0.32+0.16*(\x-1)} \pgfmathsetmacro\dy{0.16*(\y-0.75)}
+      \draw[flecha,ingLes] (\x,\y) -- ++(\dx,\dy);}
+    \node[font=\scriptsize,anchor=north] at (1.1,-0.2) {$\boldsymbol U^{*}$: $\nabla\!\cdot\boldsymbol u \neq 0$};
+  \end{scope}
+  \draw[-{Stealth[length=6pt]},tinta,line width=1pt] (2.75,0.75) -- node[above,font=\scriptsize]{$-\,\delta t\,\nabla\Phi$} (3.85,0.75);
+  \begin{scope}[shift={(4.3,0)}]
+    \foreach \x in {0,0.5,...,2} \foreach \y in {0,0.5,...,1.5} \draw[flecha,ingTau] (\x,\y) -- ++(0.32,0);
+    \node[font=\scriptsize,anchor=north] at (1.1,-0.2) {$\boldsymbol U$: $\nabla\!\cdot\boldsymbol u = 0$};
+  \end{scope}
+\end{tikzpicture}

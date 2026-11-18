@@ -1,0 +1,10 @@
+%% Etapas de un Runge–Kutta dentro de un paso (posiciones ilustrativas).
+\begin{tikzpicture}[x=5.6cm]
+  \draw[tenue,-{Stealth[length=4pt]}] (0,0) -- (1.08,0) node[right,font=\scriptsize]{$t$};
+  \node[below=3pt,font=\scriptsize] at (0,0) {$t^n$}; \node[below=3pt,font=\scriptsize] at (1,0) {$t^{n+1}$};
+  \foreach \c/\i in {0/1,0.5/2,1/3} {
+    \fill[ingLes] (\c,0) circle (2.4pt);
+    \node[above=5pt,font=\scriptsize,text=ingLes!85!black] at (\c,0) {etapa \i};}
+  \draw[{Stealth[length=3pt]}-{Stealth[length=3pt]},tenue] (0,-0.55) -- (0.5,-0.55) node[midway,below,font=\tiny]{$c_2\,\delta t$};
+  \node[font=\tiny,text=tenue,anchor=west] at (0.02,0.75) {en cada etapa: predictor $\to$ Poisson $\to$ corrección};
+\end{tikzpicture}

@@ -1,0 +1,28 @@
+%% Cómo se comparan los casos: de Alya a la DNS, con AIRE. Todas las cajas del mismo tamaño, borde negro.
+\begin{tikzpicture}[
+    caja/.style={fill=#1!12,draw=tinta,line width=0.6pt,rounded corners=3pt,
+      text width=2.72cm,minimum height=2.05cm,align=left,inner sep=5pt,font=\footnotesize,anchor=north},
+    flecha/.style={-{Stealth[length=6pt]},tinta,line width=0.9pt}]
+  \def\dx{3.56}
+  % --- cadena ---
+  \node[caja=ingEsq] (a) at (0,0)
+    {\textbf{Alya} {\color{tenue}(MN5)}\\ $\boldsymbol u$, $p$, $\boldsymbol\omega$ y promedios en $t$:
+     $\langle\boldsymbol u\rangle$, $\langle p\rangle$, $\langle u_iu_j\rangle$};
+  \node[caja=ingEsq] (b) at (\dx,0)
+    {\textbf{alya2ensight.py}\\ formato EnSight};
+  \node[caja=ingTau] (c) at (2*\dx,0)
+    {\textbf{AIRE run}\\ promedio en la ventana de $t$ y en $\theta$, $z$\\ {\color{tenue}últimos $\sim$1.5 s}};
+  \node[caja=ingTau] (d) at (3*\dx,0)
+    {\textbf{AIRE compare}\\ frente a la DNS\\ {\color{tenue}error L2}};
+  \draw[flecha] (a.east) -- (b.west); \draw[flecha] (b.east) -- (c.west); \draw[flecha] (c.east) -- (d.west);
+  % --- lo que sale de AIRE run ---
+  \node[anchor=south west,font=\scriptsize,text=tenue,inner sep=0pt] at (-1.56,-2.62) {Lo que sale de \textbf{AIRE run}};
+  \node[caja=ingTau] (s1) at (0,-2.75)
+    {\textbf{Perfiles} en $y^+$\\ $\bar u_z^+$, rms, $\langle u'_zu'_r\rangle^+$, producción, balance};
+  \node[caja=ingTau] (s2) at (\dx,-2.75)
+    {\textbf{$\tau_w$ y $u_\tau$}\\ desde la pared (AVTAN; WSS no vale en \caso{exp})};
+  \node[caja=ingTau] (s3) at (2*\dx,-2.75)
+    {\textbf{Witness}\\ series en un punto $\to$ espectros $E_k(f)$};
+  \node[caja=ingSub] (s4) at (3*\dx,-2.75)
+    {\textbf{Nuevo}\\ iteraciones del solver y coste {\color{tenue}(.sol, performance.csv)}};
+\end{tikzpicture}

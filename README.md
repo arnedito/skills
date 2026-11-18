@@ -7,7 +7,7 @@
 | [`charlas-charlie`](charlas-charlie) | Estilo y caja de herramientas para charlas en Beamer/LaTeX: 6 temas, portada con logos, fondos *low-poly*, figuras matplotlib con el mismo estilo, scripts para compilar y revisar cada slide |
 | [`tikz-charlie`](tikz-charlie) | Criterios estéticos, plantillas y verificación para diagramas TikZ (slides, papers, tesis) |
 | [`charlie-brain`](charlie-brain) | Monta y hace evolucionar el cerebro de un repo: `CLAUDE.md` corto, wiki, ADRs, capas de tests, CI y flujo issue → PR (`init`, `audit`, `retro`) |
-| [`para-el-carro`](para-el-carro) | Pide al agente que vuelva a explicar lo último despacio y con contexto |
+| [`para-el-carro`](para-el-carro) | Pide al agente que vuelva a explicar lo último despacio, con contexto y con la técnica de Feynman |
 
 ## Instalación
 

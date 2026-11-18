@@ -13,7 +13,7 @@ mismos colores que las slides, plantillas de diagramas TikZ y scripts para compi
 SKILL.md              instrucciones para Claude (cuándo y cómo usar la skill)
 assets/estilo/        el estilo: preambulo.tex, tema-*.tex, charla*.mplstyle, logos/, fondos low-poly
 assets/plantilla/     main.tex, make_figs.py y BRIEF.md de una charla nueva
-assets/diagramas/     plantillas TikZ (y charla01/: los originales de una charla completa)
+assets/diagramas-charla01/  diagramas de una charla completa, como ejemplo
 references/           temas, diagramas, figuras, diseño, narrativa y trampas (los lee Claude bajo demanda)
 scripts/              nueva_charla.sh, compilar.sh, renderizar.sh, hoja_contactos.sh, comparar_temas.sh,
                       lowpoly.py, preparar_logos.py
@@ -83,8 +83,9 @@ se vacían para que se lean los cornetes).
 
 ![Plantillas de diagramas](docs/diagramas.png)
 
-Plantillas en `assets/diagramas/`; se copian a la charla y se adaptan. Solo usan tokens de color del tema
-(`tinta`, `tenue`, `fondo`, `acento`, `serieA`…`serieD`), así que cambian con él.
+Los criterios y las plantillas de diagramas viven en la skill hermana
+[`tikz-charlie`](../tikz-charlie) (las dos se instalan juntas). Solo usan tokens de color del tema, así que
+cambian con él.
 
 ## Figuras
 

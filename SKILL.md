@@ -20,7 +20,8 @@ Casi siempre esta skill basta. Carga otra solo en estos casos:
 | Guion desde cero o formato nuevo (estructura, tiempos, narrativa a fondo) | `scientific-slides` |
 | La charla sale de un paper (y notas del orador) | `presenting-conference-talks` |
 | «Esto está feo»: crítica visual a fondo | `impeccable` (sus criterios; sus scripts son de web) |
-| Un problema de sintaxis TikZ que no sale con `references/diagramas.md` | `tikz-cheatsheet` |
+| Cualquier diagrama o dibujo TikZ (criterios, plantillas, verificación) | `tikz-charlie` |
+| Sintaxis TikZ rara que no esté en `tikz-charlie` | `tikz-cheatsheet` |
 
 ## Arranque
 
@@ -70,9 +71,8 @@ Detalle de cada tema, paleta y cómo añadir un logo o un fondo: `references/tem
    casos en versalitas), `\figura{fichero}{ancho}{alto}{qué falta}` (si la figura no existe deja un hueco
    rotulado: la charla compila desde el primer día).
 3. **Figuras de datos**: matplotlib con `make_figs.py`, al tamaño final y sin escalar. `references/figuras.md`.
-4. **Esquemas**: TikZ en `diagramas/<nombre>.tex` con `\input`. Parte de una plantilla de
-   `SKILL/assets/diagramas/` (flujo con bucle, pipeline, selector, tabla de chips, imagen anotada, ejes,
-   matriz por bloques, secuencia de llamadas, elemento): `references/diagramas.md`.
+4. **Esquemas**: carga la skill `tikz-charlie` (criterios, plantillas y `diagrama.sh`). En la charla van en
+   `diagramas/<nombre>.tex` con `\input`; lo propio de slides, en `references/diagramas.md`.
 5. **Verificar mirando** (abajo). Siempre.
 
 ## Narrativa en corto
@@ -135,7 +135,7 @@ Lista completa (TikZ, matplotlib, transparencias, Python): `references/trampas.m
 | Fichero | Cuándo leerlo |
 |---|---|
 | `references/temas.md` | elegir o cambiar tema, paleta, logos, fondos, añadir un logo o un fondo low-poly |
-| `references/diagramas.md` | cualquier esquema TikZ: plantillas, estilo de cajas y flechas, cómo adaptarlas |
+| `references/diagramas.md` | diagramas dentro de una charla (el resto, en `tikz-charlie`) |
 | `references/figuras.md` | figuras matplotlib: estilo, tamaños por tema, familias de color |
 | `references/diseno.md` | pulir o criticar una slide; criterios con ejemplos |
 | `references/narrativa.md` | estructura de una charla, bloques, tiempos, apéndice, notas |

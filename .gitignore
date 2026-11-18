@@ -1,0 +1,5 @@
+.DS_Store
+*-workspace/
+skills-mono-tmp/
+charlas-charlie/assets/estilo/logos/*.png
+charlas-charlie/evals/*/files/**/logos/*.png
